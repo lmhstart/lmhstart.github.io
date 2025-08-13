@@ -3,5 +3,6 @@
     "subTitle": "Blog description",
     "avatarUrl": "https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg",
     "GMEEK_VERSION": "last",
-    "custom_css": "/assets/css/custom.css"
+    "custom_css": "/assets/css/custom.css",
+    "injectCSS": "<style>body { background-image: url('https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/1740829524742e9948036c991b5a42afd988e235617b0768c.png'); background-size: cover; }</style>"
 }
