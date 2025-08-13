@@ -3,6 +3,5 @@
     "subTitle":"Blog description",
     "avatarUrl":"https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg",
     "GMEEK_VERSION":"last"
+    "custom_css": "/assets/css/custom.css"
 }
-# 自定义CSS文件路径
-custom_css: "/assets/css/custom.css"
