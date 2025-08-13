@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="##### 黑话：str为字符串。">
+<meta property="og:title" content="Python basic tutorial part 1">
+<meta property="og:description" content="##### 黑话：str为字符串。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lmhstart.github.io/post/Python%20basic%20tutorial%20part%201.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg">
+<title>Python basic tutorial part 1</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+<style>.markdown-alert{padding:0.5rem 1rem;margin-bottom:1rem;border-left:.25em solid var(--borderColor-default,var(--color-border-default));}.markdown-alert .markdown-alert-title {display:flex;font-weight:var(--base-text-weight-medium,500);align-items:center;line-height:1;}.markdown-alert>:first-child {margin-top:0;}.markdown-alert>:last-child {margin-bottom:0;}</style><style>.markdown-alert.markdown-alert-tip {border-left-color:var(--borderColor-success-emphasis, var(--color-success-emphasis));background-color:var(--color-success-subtle);}.markdown-alert.markdown-alert-tip .markdown-alert-title {color: var(--fgColor-success,var(--color-success-fg));}</style>
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Python basic tutorial part 1</h1>
+<div class="title-right">
+    <a href="https://lmhstart.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/lmhstart/lmhstart.github.io/issues/2" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h5>黑话：str为字符串。seq为序列，可以是列表也可以是元组。st为列表。index为索引，从0开始计。方法(method)是指object.function()形式。布尔值：True and False。</h5>
+<h2>格式化</h2>
+<h4>1.%格式：</h4>
+<p><strong>一般形式为：</strong></p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c1">%</span>[<span class="pl-s1">flag</span>][<span class="pl-s1">width</span>][.<span class="pl-s1">precision</span>] <span class="pl-s1">type</span></pre></div>
+<p>flag:为预留值设置对齐方式，可省略</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>左对齐</td>
+</tr>
+<tr>
+<td>+</td>
+<td>右对齐且正数显示加号(+)</td>
+</tr>
+<tr>
+<td>space</td>
+<td>右对齐</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>width:字符串的输出宽度，可省略<br>
+precision：数值保留的小数位数，可省略<br>
+type:格式符，<strong>不可省略</strong>，常用如下：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%d</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>小数</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h4>2.format格式：</h4>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 位置参数</span>
+<span class="pl-en">print</span>(<span class="pl-s">"{} {}"</span>.<span class="pl-c1">format</span>(<span class="pl-s">"Hello"</span>, <span class="pl-s">"World"</span>))  <span class="pl-c"># Hello World</span>
+
+<span class="pl-c"># 索引参数</span>
+<span class="pl-en">print</span>(<span class="pl-s">"{0} {1}"</span>.<span class="pl-c1">format</span>(<span class="pl-s">"Hello"</span>, <span class="pl-s">"World"</span>))  <span class="pl-c"># Hello World</span>
+<span class="pl-en">print</span>(<span class="pl-s">"{1} {0}"</span>.<span class="pl-c1">format</span>(<span class="pl-s">"Hello"</span>, <span class="pl-s">"World"</span>))  <span class="pl-c"># World Hello</span>
+
+<span class="pl-c"># 命名参数</span>
+<span class="pl-en">print</span>(<span class="pl-s">"{name} is {age} years old"</span>.<span class="pl-c1">format</span>(<span class="pl-s1">name</span><span class="pl-c1">=</span><span class="pl-s">"Alice"</span>, <span class="pl-s1">age</span><span class="pl-c1">=</span><span class="pl-c1">25</span>))
+<span class="pl-c"># Alice is 25 years old</span></pre></div>
+<h2>数值类型转换</h2>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p>int()<br>
+float()<br>
+complex()<br>
+str()<br>
+eval()<br>
+tuple()<br>
+list()<br>
+set()</p>
+</div>
+<h2>print()函数的参数</h2>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">print</span>(<span class="pl-c1">&lt;</span><span class="pl-s1">expr</span><span class="pl-c1">&gt;</span>[,<span class="pl-c1">&lt;</span><span class="pl-s1">expr</span><span class="pl-c1">&gt;</span>,...][,<span class="pl-s1">seq</span><span class="pl-c1">=</span><span class="pl-c1">&lt;</span><span class="pl-s1">string</span><span class="pl-c1">&gt;</span>][,<span class="pl-s1">end</span><span class="pl-c1">=</span><span class="pl-c1">&lt;</span><span class="pl-s1">string</span><span class="pl-c1">&gt;</span>])</pre></div>
+<p><code class="notranslate">&lt;expr&gt;</code>为表达式<br>
+seq： ==多个==输出数据的分隔符，可省略，单个空格' ' by default<br>
+end:末尾输出内容，可省略，默认为换行符'\n'</p>
+<hr>
+<h1>五大字符串处理函数（其实是方法）</h1>
+<h2>1.常用字符串转换函数==(准确来说用法是方法)==</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>capitalize()</td>
+<td>字符串首字母大写，其余小写</td>
+</tr>
+<tr>
+<td>title()</td>
+<td>每个单词首字母大写，其余小写</td>
+</tr>
+<tr>
+<td>lower()</td>
+<td>改小写</td>
+</tr>
+<tr>
+<td>upper()</td>
+<td>改大写</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>2.常用字符串判断函数==(准确来说用法是方法)==</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isalpha()</td>
+<td>判断是否由字母构成</td>
+</tr>
+<tr>
+<td>isdigit()</td>
+<td>判断是否由数字构成</td>
+</tr>
+<tr>
+<td>islower()</td>
+<td>判断是否由小写构成</td>
+</tr>
+<tr>
+<td>isalnum()</td>
+<td>判断是否由数字or字母构成</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p>[!danger]<br>
+返回的是True或者False</p>
+</blockquote>
+<h2>3.常用字符串统计函数==(准确来说用法是方法)==</h2>
+<p>count(substr,[start,[end]])<br>
+len(str)</p>
+<h2>4.常用字符串拆合函数==(准确来说用法是方法)==</h2>
+<p>join(seq)<br>
+split(seq,[num]),<code class="notranslate">&lt;num&gt;</code>为拆分次数,以seq为分隔符，<strong>默认是空格</strong></p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">st</span><span class="pl-c1">=</span>[<span class="pl-s">'LMH'</span>,<span class="pl-s">'handsome.'</span>]
+<span class="pl-s">'is'</span>.<span class="pl-c1">join</span>(<span class="pl-s1">st</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">st</span>)</pre></div>
+<p>结果为'LMH is handsome.'</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">st</span><span class="pl-c1">=</span>[<span class="pl-v">Hello</span>,<span class="pl-v">Python</span>,<span class="pl-c1">C</span><span class="pl-c1">+</span><span class="pl-c1">+</span><span class="pl-s1"></span>]
+<span class="pl-s1">st</span>.<span class="pl-c1">split</span>(<span class="pl-s">','</span>)   <span class="pl-c">#以逗号为分割符</span>
+<span class="pl-en">print</span>(<span class="pl-s1">st</span>)</pre></div>
+<p>结果为'Hello Pyhon C++'</p>
+<h2>5.常用字符串对齐函数==(准确来说用法是方法)==</h2>
+<p>center(width [,fillchar])<br>
+ljust(width [,fillchar])<br>
+rjust(width [,fillchar])</p>
+<p>均为返回长度为width的字符串，分别居中，左对齐，右对齐，长度不足的部分就填充fillchar<br>
+（默认空格）</p>
+<h2>常用其他函数</h2>
+<p><strong>==id(object)==</strong>  返回object的唯一标识符（内存地址）<br>
+在浅复制、深复制梦幻联动的时候非常好用！！！</p>
+<hr>
+<h1>random随机数模块</h1>
+<p>randint(min,max),返回一个[min,max]范围内的随机整数<br>
+uniform(min,max),返回一个(min,max)范围内的随机浮点数<br>
+random(),返回一个在[0,1)内的随机浮点数<br>
+randrange([start,] stop [,step]),返回一个在[start,stop)范围内的step步长的随机整数</p>
+<hr>
+<h1>列表(list)</h1>
+<h4>简单性质：</h4>
+<ol>
+<li>访问和修改直接对st[index]进行</li>
+<li>成员判断为 object in [],回馈为布尔值</li>
+<li>有关索引index为负数：<strong><code class="notranslate">list[-n]</code></strong>：表示列表的倒数第 n 个元素（即 <code class="notranslate">list[len(list) - n]</code>）</li>
+</ol>
+<h2>1.列表常用函数==(除了len,del为正常函数用法，其他为方法用法)==</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>函数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>append(x)</td>
+<td>尾部加单个元素x</td>
+</tr>
+<tr>
+<td>index(x)</td>
+<td>检索x所在位置</td>
+</tr>
+<tr>
+<td>count(x)</td>
+<td>统计x出现次数，不含x将返回0</td>
+</tr>
+<tr>
+<td>del seq[index]</td>
+<td>删除列表索引为index的元素</td>
+</tr>
+<tr>
+<td>extend(str1)</td>
+<td>加新表str1</td>
+</tr>
+<tr>
+<td>pop(index)</td>
+<td>删除索引为index的元素并弹出该元素</td>
+</tr>
+<tr>
+<td>len(str)</td>
+<td>列表长度（可以计算重复元素，但是集合(set)不行）</td>
+</tr>
+<tr>
+<td>insert(index,x)</td>
+<td>插入单个元素x在索引index位置</td>
+</tr>
+<tr>
+<td>remove(x)</td>
+<td>删除元素x，仅删除从左往右数第一个该元素x</td>
+</tr>
+<tr>
+<td>sort()</td>
+<td>默认升序，数值型数据从小到大，字符串型数据则按字典顺序排序</td>
+</tr>
+<tr>
+<td>reverse()</td>
+<td>逆序</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>2.切片(slice)</h2>
+<h6>--列表的子集</h6>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">seq</span>[<span class="pl-s1">start</span>:<span class="pl-s1">end</span>: <span class="pl-s1">step</span>]</pre></div>
+<p>start是索引开始处，可以省略，默认为0<br>
+end是结束位置，可以省略，默认为列表长度(len(seq))</p>
+<p>全省略则可称为全切片[:]</p>
+<p>step是步长，正数表示从左往右截取，负数表示从右往左截取，可以省略但不能为0，默认为1</p>
+<blockquote>
+<p>[!attention] 切片范围是左闭右开，即[start,end)</p>
+</blockquote>
+<h2>3.列表的产生方法</h2>
+<ul>
+<li>==range实现数值递增==</li>
+</ul>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-en">range</span>(<span class="pl-s1">start</span>,<span class="pl-s1">end</span>,<span class="pl-s1">step</span>)</pre></div>
+<p>范围仍是左闭右开，即[start,end)</p>
+<blockquote>
+<p>[!attention] 注意！range函数使用后并不会在内存中立刻产生大量数字，只是产生一个可迭代对象，具体数值迭代过程逐一产生，有利于节省内存</p>
+</blockquote>
+<p>这里可以将range()函数产生的迭代对象作为==<strong>列表创建函数list()</strong>==的参数<br>
+比如：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">a</span><span class="pl-c1">=</span><span class="pl-en">range</span>(<span class="pl-c1">1</span>,<span class="pl-c1">5</span>)
+<span class="pl-s1">st</span><span class="pl-c1">=</span><span class="pl-en">list</span>(<span class="pl-s1">a</span>)      <span class="pl-c">#a是可迭代对象</span>
+<span class="pl-en">print</span>(<span class="pl-s1">st</span>)</pre></div>
+<p>结果是[1,2,3,4]</p>
+<ul>
+<li>==多维列表==，本质就是加了一列，仍然可以用<code class="notranslate">seq[][]</code>表示</li>
+<li>==列表生成式！！！==非常重要<br>
+new_list=[表达式 for 变量 in 可迭代对象&lt;if 条件&gt;]</li>
+</ul>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">st1</span><span class="pl-c1">=</span><span class="pl-en">list</span>(<span class="pl-en">range</span>(<span class="pl-c1">5</span>))
+<span class="pl-k">print</span>（<span class="pl-s1">st1</span>）</pre></div>
+<p>结果为[0,1,2,3,4]</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">st2</span><span class="pl-c1">=</span>[<span class="pl-s1">x</span><span class="pl-c1">**</span><span class="pl-c1">2</span> <span class="pl-k">for</span> <span class="pl-s1">x</span> <span class="pl-c1">in</span> <span class="pl-s1">st</span>]
+<span class="pl-en">print</span>(<span class="pl-s1">st2</span>)</pre></div>
+<p>结果为[0,1,4,9,16]</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">st3</span><span class="pl-c1">=</span>[<span class="pl-s1">x</span> <span class="pl-k">for</span> <span class="pl-s1">x</span> <span class="pl-c1">in</span> <span class="pl-s1">st2</span> <span class="pl-k">if</span> <span class="pl-s1">x</span> <span class="pl-c1"><span class="pl-c1">not</span> <span class="pl-c1">in</span></span> <span class="pl-s1">st1</span>]
+<span class="pl-en">print</span>(<span class="pl-s1">st3</span>)</pre></div>
+<p>结果为[9,16]</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-en">print</span>([<span class="pl-s1">x</span> <span class="pl-k">for</span> <span class="pl-s1">x</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">20</span>) <span class="pl-k">if</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">3</span><span class="pl-c1">==</span><span class="pl-c1">0</span>])</pre></div>
+<p>结果为[0,3,6,9,12,15,18]</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://lmhstart.github.io">B L O G</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","lmhstart/lmhstart.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
