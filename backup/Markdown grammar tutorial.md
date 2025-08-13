@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Wed, 13 Aug 2025 02:37:06 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>Markdown grammar tutorial</title><link>https://lmhstart.github.io/post/Markdown%20grammar%20tutorial.html</link><description># 一级标题
+# 一级标题
 ## 二级标题
 ### 三级标题
 #### 四级标题
@@ -22,20 +21,20 @@
 ==obisidian==     分别 在 需要加粗文字前后添加两个等号
 
 ## 下划线：
-&lt;u&gt;obisidian&lt;/u&gt;    用u标签包住文字
+<u>obisidian</u>    用u标签包住文字
 
 ## 删除线：
 ~~obisidian~~      分别 在 需要加粗文字前后添加两个波浪号 
 
 ## 超链接：
-王力宏[《我们的歌》](【【1080P】王力宏2021福利秀《我们的歌》】 https://www.bilibili.com/video/BV1zV411e7id/?share_source=copy_web&amp;vd_source=b4602159fb04925f1f56ddcad61dc50f)                                                             选中文字然后Ctrl+K并附上链接
+王力宏[《我们的歌》](【【1080P】王力宏2021福利秀《我们的歌》】 https://www.bilibili.com/video/BV1zV411e7id/?share_source=copy_web&vd_source=b4602159fb04925f1f56ddcad61dc50f)                                                             选中文字然后Ctrl+K并附上链接
 
 | 样式         | 语法          | 快捷键    | 示例              |
 | ---------- | ----------- | ------ | --------------- |
 | **加粗**     | `**文字**`    | Ctrl+B | **Obsidian**    |
 | *倾斜*       | `*文字*`      | Ctrl+I | *Obsidian*      |
 | ==高亮==     | `==文字==`    | -      | ==Obsidian==    |
-| &lt;u&gt;下划线&lt;/u&gt; | `&lt;u&gt;文字&lt;/u&gt;` | -      | &lt;u&gt;Obsidian&lt;/u&gt; |
+| <u>下划线</u> | `<u>文字</u>` | -      | <u>Obsidian</u> |
 | ~~删除线~~    | `~~文字~~`    | -      | ~~Obsidian~~    |
 
 
@@ -64,25 +63,25 @@
 
 
 # 引用
-&gt; quote
-&gt; This is a quote. 
-&gt; You just need to add  symbol '&gt;' at every line to achieve your quote. 
+> quote
+> This is a quote. 
+> You just need to add  symbol '>' at every line to achieve your quote. 
 
 
 # Callout 引用
-&gt; [!danger]  Dangerous behavior !
+> [!danger]  Dangerous behavior !
 
-&gt; [!attention] 
+> [!attention] 
 
-&gt; [!tip] 
+> [!tip] 
 
-&gt; [!note] 
+> [!note] 
 
-&gt; [!abstract] 
+> [!abstract] 
 
-&gt; [!example] 
+> [!example] 
 
-&gt; [!question] 
+> [!question] 
 
 
 # 链接
@@ -167,13 +166,13 @@ for i in range(1,n):
   ```
 - **多行内容**：
   ```markdown
-  | 单元格1 | &lt;div style='width:100px'&gt;单元格2&lt;br&gt;第二行内容&lt;/div&gt; |
+  | 单元格1 | <div style="width:100px">单元格2<br>第二行内容</div> |
   ```
 - **嵌入样式**：
   ```markdown
   | 样式 | 示例 |
   |------|------|
-  | 颜色 | &lt;span style='color:red'&gt;红色文字&lt;/span&gt; |
+  | 颜色 | <span style="color:red">红色文字</span> |
   ```
 
 
@@ -187,16 +186,15 @@ for i in range(1,n):
 # 颜色编辑 （类似CSS）
 
 ```markdown
-&lt;span style='color:red'&gt;红色文字&lt;/span&gt;
-&lt;span style='color:#00FFFF'&gt;绿色文字&lt;/span&gt;
-&lt;span style='background-color:yellow; color:black'&gt;黄底黑字&lt;/span&gt;
-&lt;span style='background-color:#000000;color:#FFFFFF'&gt;我是红色&lt;/span&gt;
+<span style="color:red">红色文字</span>
+<span style="color:#00FFFF">绿色文字</span>
+<span style="background-color:yellow; color:black">黄底黑字</span>
+<span style='background-color:#000000;color:#FFFFFF'>我是红色</span>
 ```
 
 ### **以下为效果：**
 
-&lt;span style='color:red'&gt;红色文字&lt;/span&gt;
-&lt;span style='color:#00FFFF'&gt;绿色文字&lt;/span&gt;
-&lt;span style='background-color:yellow; color:black'&gt;黄底黑字&lt;/span&gt;
-&lt;span style='background-color:#000000;color:#FFFFFF'&gt;我是红色&lt;/span&gt;
-。</description><guid isPermaLink="true">https://lmhstart.github.io/post/Markdown%20grammar%20tutorial.html</guid><pubDate>Wed, 13 Aug 2025 02:36:32 +0000</pubDate></item></channel></rss>
+<span style="color:red">红色文字</span>
+<span style="color:#00FFFF">绿色文字</span>
+<span style="background-color:yellow; color:black">黄底黑字</span>
+<span style='background-color:#000000;color:#FFFFFF'>我是红色</span>
