@@ -1,0 +1,1 @@
+[nano banana prompts.pdf](https://github.com/user-attachments/files/22197151/nano.banana.prompts.pdf)
