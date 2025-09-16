@@ -1,5 +1,39 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>B L O G</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>B L O G</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Sun, 07 Sep 2025 16:19:55 +0000</lastBuildDate><managingEditor>B L O G</managingEditor><ttl>60</ttl><webMaster>B L O G</webMaster><item><title>Nano_banana_prompts</title><link>https://lmhstart.github.io/post/Nano_banana_prompts.html</link><description># 1.各表情头像prompt
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>B L O G</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>B L O G</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Tue, 16 Sep 2025 02:12:55 +0000</lastBuildDate><managingEditor>B L O G</managingEditor><ttl>60</ttl><webMaster>B L O G</webMaster><item><title>python字典用法知多少？</title><link>https://lmhstart.github.io/post/python-zi-dian-yong-fa-zhi-duo-shao-%EF%BC%9F.html</link><description>## 1. 字典存储任意可调用对象（Callable）
+可以混合存储各种 Callable
+比如：
+
+| 名称         | 举例代码                                                                                                                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 类          | class SMSNotifier:&lt;br&gt;    def `__init__`(self, number, message):&lt;br&gt;        self.number = number&lt;br&gt;        self.message = message&lt;br&gt;    def send(self):&lt;br&gt;        print(f'Sending SMS to {self.number}: {self.message}') |
+| `__call__` | class PushNotification:&lt;br&gt;    def `__call__`(self, user_id, content):&lt;br&gt;        print(f'Sending push to user {user_id}: {content}')                                                                                       |
+| Lambda 表达式 | log_to_file = lambda message: print(f'Logging to file: {message}')                                                                                                                                                          |
+| 普通函数       | def send_email(to, subject, body):&lt;br&gt;    print(f'Sending email to {to} with subject '{subject}'')                                                                                                                          |
+对以上创建字典
+```python
+notifiers = {
+    'email': send_email,          # 函数
+    'sms': SMSNotifier,           # 类
+    'push': PushNotification(),   # 可调用实例
+    'log': log_to_file,           # Lambda
+    'alert': lambda msg: print(f'🚨 ALERT: {msg}') # 内联 Lambda
+}
+```
+然后用函数导出
+```python
+def notify(method, *args, **kwargs):
+    notifier = notifiers[method]
+    return notifier(*args, **kwargs)
+    
+notify('email', 'user@example.com', 'Hello', 'This is a test')
+notify('sms', '+1234567890', 'Hi there!') 
+notify('push', 'user_123', 'You have a new message!')
+notify('log', 'System started')
+notify('alert', 'CPU usage high!')
+```
+
+实际运用1：在游戏设计技能当中，可以利用字典嵌套和函数将文字说明和效果实现绑定，
+- 函数也能“存起来”：不像数字或字符串，函数（包括 lambda）是可以“保存”和“传递”的对象。</description><guid isPermaLink="true">https://lmhstart.github.io/post/python-zi-dian-yong-fa-zhi-duo-shao-%EF%BC%9F.html</guid><pubDate>Tue, 16 Sep 2025 02:12:25 +0000</pubDate></item><item><title>Nano_banana_prompts</title><link>https://lmhstart.github.io/post/Nano_banana_prompts.html</link><description># 1.各表情头像prompt
 Character emotions sheet, multiple expressions of the provided character, featuring happy, sad, angry, surprised, shy, confused, playful, disgusted, thoughtful, crying, and embarrassed. Full set of emotions, clear and distinct expressions, clean background
 
 &gt; 
