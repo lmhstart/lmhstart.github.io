@@ -1,5 +1,36 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>B L O G</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>B L O G</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Tue, 16 Sep 2025 02:12:55 +0000</lastBuildDate><managingEditor>B L O G</managingEditor><ttl>60</ttl><webMaster>B L O G</webMaster><item><title>python字典用法知多少？</title><link>https://lmhstart.github.io/post/python-zi-dian-yong-fa-zhi-duo-shao-%EF%BC%9F.html</link><description>## 1. 字典存储任意可调用对象（Callable）
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>B L O G</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>B L O G</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Fri, 03 Oct 2025 08:49:58 +0000</lastBuildDate><managingEditor>B L O G</managingEditor><ttl>60</ttl><webMaster>B L O G</webMaster><item><title>rfordatascience:从入门到入土_实践篇</title><link>https://lmhstart.github.io/post/rfordatascience--cong-ru-men-dao-ru-tu-_-shi-jian-pian.html</link><description>[mpg.html](https://github.com/user-attachments/files/22677446/mpg.html)
+---
+title: 'MPG 分析报告'
+output: html_document
+date: '2025-10-03'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;http://rmarkdown.rstudio.com&gt;.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+glimpse(mpg)
+```
+
+## Inclusion Plots 
+
+```{r scatter_plot, echo=TRUE, message=TRUE, warning=TRUE}
+ggplot(mpg,aes(x = cty,
+               y = hwy,
+               colour = class)) +
+  geom_point() +
+  scale_color_brewer(palette = 'Dark2')
+
+。</description><guid isPermaLink="true">https://lmhstart.github.io/post/rfordatascience--cong-ru-men-dao-ru-tu-_-shi-jian-pian.html</guid><pubDate>Fri, 03 Oct 2025 08:49:23 +0000</pubDate></item><item><title>python字典用法知多少？</title><link>https://lmhstart.github.io/post/python-zi-dian-yong-fa-zhi-duo-shao-%EF%BC%9F.html</link><description>## 1. 字典存储任意可调用对象（Callable）
 可以混合存储各种 Callable
 比如：
 
