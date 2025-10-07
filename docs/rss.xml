@@ -1,5 +1,37 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>B L O G</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>B L O G</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Fri, 03 Oct 2025 08:49:58 +0000</lastBuildDate><managingEditor>B L O G</managingEditor><ttl>60</ttl><webMaster>B L O G</webMaster><item><title>rfordatascience:从入门到入土_实践篇</title><link>https://lmhstart.github.io/post/rfordatascience--cong-ru-men-dao-ru-tu-_-shi-jian-pian.html</link><description>[mpg.html](https://github.com/user-attachments/files/22677446/mpg.html)
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>B L O G</title><link>https://lmhstart.github.io</link><description>Blog description</description><copyright>B L O G</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg</url><title>avatar</title><link>https://lmhstart.github.io</link></image><lastBuildDate>Tue, 07 Oct 2025 08:03:56 +0000</lastBuildDate><managingEditor>B L O G</managingEditor><ttl>60</ttl><webMaster>B L O G</webMaster><item><title>python里的不可变变量(immutable)与可变变量(mutable)</title><link>https://lmhstart.github.io/post/python-li-de-bu-ke-bian-bian-liang-%28immutable%29-yu-ke-bian-bian-liang-%28mutable%29.html</link><description># python里的不可变变量(immutable)与可变变量(mutable)
+
+ ---
+
+
+&gt;在正文开始前先看两道题做做比较
+```python
+def func(num):
+    num += 1 
+    return num
+
+x = 5
+print(func(x))  # 输出结果6
+print(x)        # 输出结果5 
+```
+
+
+```python
+def func(lst):
+    lst.append(4)  
+    return lst
+
+my_list = [1, 2, 3]
+print(func(my_list))  # 输出结果[1, 2, 3, 4]
+print(my_list)        # 输出结果[1, 2, 3, 4] （变了！）
+```
+
+&gt;由此可见，同样是修改变量的函数，第二段中变量`my_list`却在最后输出时发生变化
+
+
+接下来引入正题：
+
+程序的数据必须以特定类型存放在内存的某个区域，如果变量的值(value)发生了了变化，内存地址也发生了变化，那么这个变量就属于可变类型，否则为不可变类型。</description><guid isPermaLink="true">https://lmhstart.github.io/post/python-li-de-bu-ke-bian-bian-liang-%28immutable%29-yu-ke-bian-bian-liang-%28mutable%29.html</guid><pubDate>Tue, 07 Oct 2025 08:03:26 +0000</pubDate></item><item><title>rfordatascience:从入门到入土_实践篇</title><link>https://lmhstart.github.io/post/rfordatascience--cong-ru-men-dao-ru-tu-_-shi-jian-pian.html</link><description>[mpg.html](https://github.com/user-attachments/files/22677446/mpg.html)
 ---
 title: 'MPG 分析报告'
 output: html_document
