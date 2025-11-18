@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="## 前言
+
+> [!note] 
+**tidyverse** 是由 **Hadley Wickham** 及其团队开发的一系列R语言包的集合，它们有着共同的**设计哲学、语法和数据结构**，旨在使数据科学的整个过程——从数据导入到可视化和建模——更加**简单、高效且易于理解**。">
+<meta property="og:title" content="tidyverse in R for data science">
+<meta property="og:description" content="## 前言
+
+> [!note] 
+**tidyverse** 是由 **Hadley Wickham** 及其团队开发的一系列R语言包的集合，它们有着共同的**设计哲学、语法和数据结构**，旨在使数据科学的整个过程——从数据导入到可视化和建模——更加**简单、高效且易于理解**。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lmhstart.github.io/post/tidyverse%20in%20R%20for%20data%20science.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg">
+<title>tidyverse in R for data science</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+<style>.markdown-alert{padding:0.5rem 1rem;margin-bottom:1rem;border-left:.25em solid var(--borderColor-default,var(--color-border-default));}.markdown-alert .markdown-alert-title {display:flex;font-weight:var(--base-text-weight-medium,500);align-items:center;line-height:1;}.markdown-alert>:first-child {margin-top:0;}.markdown-alert>:last-child {margin-bottom:0;}</style><style>.markdown-alert.markdown-alert-note {border-left-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis));background-color:var(--color-accent-subtle);}.markdown-alert.markdown-alert-note .markdown-alert-title {color: var(--fgColor-accent,var(--color-accent-fg));}</style><style>.markdown-alert.markdown-alert-tip {border-left-color:var(--borderColor-success-emphasis, var(--color-success-emphasis));background-color:var(--color-success-subtle);}.markdown-alert.markdown-alert-tip .markdown-alert-title {color: var(--fgColor-success,var(--color-success-fg));}</style>
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">tidyverse in R for data science</h1>
+<div class="title-right">
+    <a href="https://lmhstart.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/lmhstart/lmhstart.github.io/issues/9" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h2>前言</h2>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p><strong>tidyverse</strong> 是由 <strong>Hadley Wickham</strong> 及其团队开发的一系列R语言包的集合，它们有着共同的<strong>设计哲学、语法和数据结构</strong>，旨在使数据科学的整个过程——从数据导入到可视化和建模——更加<strong>简单、高效且易于理解</strong>。</p>
+</div>
+<p>顾名思义，tidyverse库的作用核心是==“tidy”==，让数据处理更加==整洁美观==</p>
+<p>下载方法：</p>
+<div class="highlight highlight-source-r"><pre class="notranslate">install.packages(<span class="pl-s"><span class="pl-pds">"</span>tidyverse<span class="pl-pds">"</span></span>)</pre></div>
+<p><code class="notranslate">tidyverse</code> 实际上是一个<strong>元包 (Metapackage)</strong>，在里面其实有多种核心包(dplyr,ggplot2,tidyr,readr,purr,tibble,stringr,forcats)，</p>
+<ul>
+<li>
+<p><strong>数据导入:</strong> 使用 <code class="notranslate">readr</code> 包</p>
+</li>
+<li>
+<p><strong>数据整理:</strong> 使用 <code class="notranslate">tidyr</code> 包</p>
+</li>
+<li>
+<p><strong>数据操作:</strong> 使用 <strong><code class="notranslate">dplyr</code></strong> 包</p>
+</li>
+<li>
+<p><strong>数据可视化:</strong> 使用 <code class="notranslate">ggplot2</code> 包</p>
+</li>
+<li>
+<p><strong>函数式编程:</strong> 使用 <code class="notranslate">purrr</code> 包</p>
+</li>
+</ul>
+<p>每次使用时，必须像这样<code class="notranslate">library(tidyverse)</code>将包导入</p>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p>在详细介绍之前，我需要补充一个非常方便的东西———管道操作符<code class="notranslate">%&gt;%</code>，打印方法非常简单，Windows系统只需要摁住Ctrl+Shift+M快捷键打出。<br>
+管道操作符 是 <code class="notranslate">tidyverse</code> 风格的精髓。它允许您将上一步的结果直接作为下一步函数的<strong>第一个参数</strong>。这使得代码流程清晰、可读性极高。</p>
+</div>
+<p>下面我们着重介绍最常用的两个包——<code class="notranslate">dplyr</code>和<code class="notranslate">ggplot2</code></p>
+<h2>dplyr包</h2>
+<p>此包的主要功能是数据<strong>操作</strong>和<strong>转换</strong>，提供一套用于<strong>筛选 (filter)</strong>、<strong>选择 (select)</strong>、<strong>排列 (arrange)</strong>、<strong>新建变量 (mutate)</strong> 和<strong>汇总 (summarise)</strong> 等数据处理的“动词”。</p>
+<h4>1. 筛选行：<code class="notranslate">filter()</code></h4>
+<p><strong>功能：</strong> 根据变量的<strong>值</strong>，选择符合条件的行（观测）。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 选出所有来自“北京”的客户</span>
+<span class="pl-smi">data_frame</span> %<span class="pl-k">&gt;</span>% 
+  filter(<span class="pl-smi">city</span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>北京<span class="pl-pds">"</span></span>) </pre></div>
+<h4>2. 重排列行：<code class="notranslate">arrange()</code></h4>
+<p><strong>功能：</strong> 根据一个或多个变量的值对行进行<strong>排序</strong>。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 按年龄升序排列，如果年龄相同，则按收入降序排列</span>
+<span class="pl-smi">data_frame</span> %<span class="pl-k">&gt;</span>% 
+  arrange(<span class="pl-smi">age</span>, desc(<span class="pl-smi">income</span>)) </pre></div>
+<h4>3. 选择列：<code class="notranslate">select()</code></h4>
+<p><strong>功能：</strong> 根据变量的<strong>名称</strong>，选择、删除或重命名列。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 仅保留 'ID'、'name' 和 'salary' 三列</span>
+<span class="pl-smi">data_frame</span> %<span class="pl-k">&gt;</span>% 
+  select(<span class="pl-smi">ID</span>, <span class="pl-smi">name</span>, <span class="pl-smi">salary</span>)
+
+<span class="pl-c"><span class="pl-c">#</span> 删除 'notes' 这一列</span>
+<span class="pl-smi">data_frame</span> %<span class="pl-k">&gt;</span>% 
+  select(<span class="pl-k">-</span><span class="pl-smi">notes</span>)</pre></div>
+<h4>4. 添加或修改列：<code class="notranslate">mutate()</code></h4>
+<p><strong>功能：</strong> 利用现有变量的值，<strong>创建新的变量（列）</strong>，或修改现有变量。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 计算人均消费（总消费/月数）</span>
+<span class="pl-smi">data_frame</span> %<span class="pl-k">&gt;</span>% 
+  mutate(<span class="pl-v">avg_spend</span> <span class="pl-k">=</span> <span class="pl-smi">total_spend</span> <span class="pl-k">/</span> <span class="pl-smi">months</span>)</pre></div>
+<h4>5. 汇总数据：<code class="notranslate">summarise()</code></h4>
+<p><strong>功能：</strong> 将多行数据<strong>塌缩</strong>为一行，计算出汇总统计量（如均值、总和、计数）。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 计算所有客户的平均年龄和最高收入</span>
+<span class="pl-smi">data_frame</span> %<span class="pl-k">&gt;</span>% 
+  summarise(
+    <span class="pl-v">mean_age</span> <span class="pl-k">=</span> mean(<span class="pl-smi">age</span>, <span class="pl-v">na.rm</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>),
+    <span class="pl-v">max_income</span> <span class="pl-k">=</span> max(<span class="pl-smi">income</span>)
+  )</pre></div>
+<h2>ggplot2包</h2>
+<p>此包的主要功能是数据<strong>可视化</strong>，基于**图形语法，提供强大、灵活且美观的绘图功能</p>
+<div class="highlight highlight-source-r"><pre class="notranslate">library(<span class="pl-smi">tidyverse</span>)
+
+ggplot(<span class="pl-v">data</span> <span class="pl-k">=</span> <span class="pl-k">&lt;</span>数据框<span class="pl-k">&gt;</span>) <span class="pl-k">+</span>
+  <span class="pl-smi">geom_</span><span class="pl-k">&lt;</span>图形类型<span class="pl-k">&gt;</span>(<span class="pl-v">mapping</span> <span class="pl-k">=</span> aes(<span class="pl-k">&lt;</span><span class="pl-smi">x</span>轴变量<span class="pl-k">&gt;</span>, <span class="pl-k">&lt;</span><span class="pl-smi">y</span>轴变量<span class="pl-k">&gt;</span>, <span class="pl-v">color</span> <span class="pl-k">=</span> <span class="pl-k">&lt;</span>分组变量<span class="pl-k">&gt;</span>))</pre></div>
+<hr>
+<h1>实际运用</h1>
+<p>看完这些可能还是很模糊，接下来结合<strong>实际运用</strong></p>
+<p>这里直接使用R里的著名数据集`mpg</p>
+<blockquote>
+<p>ps：<code class="notranslate">mpg</code> 数据集观测了 <strong>38 种不同型号汽车</strong>在 1999 年和 2008 年的各种性能和分类数据</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th><strong>变量名</strong></th>
+<th><strong>含义 (What it measures)</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">manufacturer</code></td>
+<td>制造商名称 (e.g., audi, ford)</td>
+<td>字符/分类</td>
+</tr>
+<tr>
+<td><code class="notranslate">model</code></td>
+<td>汽车型号名称</td>
+<td>字符/分类</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">displ</code></strong></td>
+<td><strong>发动机排量</strong>（Liters）</td>
+<td>连续</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">year</code></strong></td>
+<td>汽车生产年份</td>
+<td>离散</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">cyl</code></strong></td>
+<td><strong>气缸数</strong>（4, 5, 6, 8）</td>
+<td>离散</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">trans</code></strong></td>
+<td>变速器类型（自动或手动）</td>
+<td>字符/分类</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">drv</code></strong></td>
+<td>驱动类型（前驱 <code class="notranslate">f</code>，后驱 <code class="notranslate">r</code>，四驱 <code class="notranslate">4</code>）</td>
+<td>字符/分类</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">cty</code></strong></td>
+<td><strong>城市燃油效率</strong>（city miles per gallon, MPG）</td>
+<td>连续</td>
+</tr>
+<tr>
+<td><strong><code class="notranslate">hwy</code></strong></td>
+<td><strong>高速公路燃油效率</strong>（highway miles per gallon, MPG）</td>
+<td>连续</td>
+</tr>
+<tr>
+<td><code class="notranslate">fl</code></td>
+<td>燃油类型 (e.g., r: Regular, p: Premium)</td>
+<td>字符/分类</td>
+</tr>
+<tr>
+<td><code class="notranslate">class</code></td>
+<td>汽车类型/级别（e.g., SUV, compact）</td>
+<td>字符/分类</td>
+</tr>
+<tr>
+<td>首先，加载库</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="highlight highlight-source-r"><pre class="notranslate">library(<span class="pl-smi">tidyverse</span>)
+data(<span class="pl-smi">mpg</span>)</pre></div>
+<h3>1. 改变和创建变量：<code class="notranslate">mutate()</code></h3>
+<p><strong>目标：</strong> 计算城市（<code class="notranslate">cty</code>）和高速（<code class="notranslate">hwy</code>）燃油效率的<strong>平均值</strong>，并将其转换为更直观的 <strong>每百公里油耗 (L/100km)</strong>。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg_mutated</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">mpg</span> %<span class="pl-k">&gt;</span>%
+  mutate(
+    <span class="pl-v">avg_mpg</span> <span class="pl-k">=</span> (<span class="pl-smi">cty</span> <span class="pl-k">+</span> <span class="pl-smi">hwy</span>) <span class="pl-k">/</span> <span class="pl-c1">2</span>,
+    <span class="pl-v">l_per_100km</span> <span class="pl-k">=</span> <span class="pl-c1">235.21</span> <span class="pl-k">/</span> <span class="pl-smi">avg_mpg</span>,
+	    )</pre></div>
+<p>对比：<br>
+直接使用R的基础用法：</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">avg_mpg</span> <span class="pl-k">&lt;-</span> (<span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">cty</span> <span class="pl-k">+</span> <span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">hwy</span>) <span class="pl-k">/</span> <span class="pl-c1">2</span>
+<span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">l_per_100km</span> <span class="pl-k">&lt;-</span> <span class="pl-c1">235.21</span> <span class="pl-k">/</span> <span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">avg_mpg</span></pre></div>
+<p>不难发现需要重复使用 '$' 符号</p>
+<h3>2. 筛选行观测：<code class="notranslate">filter()</code></h3>
+<p><strong>目标：</strong> 筛选出产于 <strong>2008 年</strong>，且 <strong>城市油耗（<code class="notranslate">cty</code>）高于 20 MPG</strong> 的车型。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg_filtered</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">mpg</span> %<span class="pl-k">&gt;</span>%
+  filter(
+    <span class="pl-smi">year</span> <span class="pl-k">==</span> <span class="pl-c1">2008</span>,     <span class="pl-c"><span class="pl-c">#</span> 筛选2008年的车型</span>
+    <span class="pl-smi">cty</span> <span class="pl-k">&gt;</span> <span class="pl-c1">20</span>          <span class="pl-c"><span class="pl-c">#</span> 城市油耗高于20</span>
+  ) %<span class="pl-k">&gt;</span>%
+  select(<span class="pl-smi">manufacturer</span>, <span class="pl-smi">model</span>, <span class="pl-smi">cty</span>, <span class="pl-smi">hwy</span>)
+
+<span class="pl-smi">mpg_filtered</span></pre></div>
+<p>对比：<br>
+直接使用R的基础用法：</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg_filtered_base</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">mpg</span>[<span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">year</span> <span class="pl-k">==</span> <span class="pl-c1">2008</span> <span class="pl-k">&amp;</span> <span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">cty</span> <span class="pl-k">&gt;</span> <span class="pl-c1">20</span>, ]</pre></div>
+<p>也不难发现，使用下标 '[]' 和 '&amp;' 符号，语句较长</p>
+<h3>3. 选择列变量：<code class="notranslate">select()</code></h3>
+<p><strong>目标：</strong> 只保留描述汽车<strong>基本特征</strong>（制造商、型号、排量）和<strong>油耗指标</strong>（<code class="notranslate">cty</code>, <code class="notranslate">hwy</code>）的列。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg_selected</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">mpg</span> %<span class="pl-k">&gt;</span>%
+  select(
+    <span class="pl-smi">manufacturer</span>, <span class="pl-c"><span class="pl-c">#</span> 选择 'manufacturer'</span>
+    <span class="pl-smi">model</span>,        <span class="pl-c"><span class="pl-c">#</span> 选择 'model'</span>
+    <span class="pl-smi">displ</span>,        <span class="pl-c"><span class="pl-c">#</span> 选择 'displ'</span>
+    starts_with(<span class="pl-s"><span class="pl-pds">"</span>c<span class="pl-pds">"</span></span>), <span class="pl-c"><span class="pl-c">#</span> 选择以 'c' 开头的变量 (cty, class)</span>
+    contains(<span class="pl-s"><span class="pl-pds">"</span>wy<span class="pl-pds">"</span></span>) <span class="pl-c"><span class="pl-c">#</span> 选择包含 'wy' 的变量 (hwy)</span>
+  )
+
+<span class="pl-smi">mpg_selected</span> %<span class="pl-k">&gt;</span>% head(<span class="pl-c1">3</span>)</pre></div>
+<p>对比：<br>
+直接使用R的基础用法：</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg_selected_base</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">mpg</span>[, c(<span class="pl-s"><span class="pl-pds">"</span>manufacturer<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>model<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>displ<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cty<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>hwy<span class="pl-pds">"</span></span>)]</pre></div>
+<h3>4. 按组拆分：<code class="notranslate">group_by()</code> 和 5. 聚合总结：<code class="notranslate">summarise()</code></h3>
+<p><code class="notranslate">group_by()</code> 负责将数据按某一分类变量分组；<code class="notranslate">summarise()</code> 负责对每个组计算汇总统计量。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">mpg_summary</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">mpg</span> %<span class="pl-k">&gt;</span>%
+  group_by(<span class="pl-smi">drv</span>) %<span class="pl-k">&gt;</span>% <span class="pl-c"><span class="pl-c">#</span> 1. 按驱动类型分组 ('4', 'f', 'r')</span>
+  summarise(
+    <span class="pl-c"><span class="pl-c">#</span> 2. 计算每个组的平均高速油耗</span>
+    <span class="pl-v">mean_hwy</span> <span class="pl-k">=</span> mean(<span class="pl-smi">hwy</span>, <span class="pl-v">na.rm</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>),
+    <span class="pl-c"><span class="pl-c">#</span> 3. 计算每个组的车型数量</span>
+    <span class="pl-v">count</span> <span class="pl-k">=</span> n(),
+    <span class="pl-c"><span class="pl-c">#</span> 4. 计算油耗的标准差</span>
+    <span class="pl-v">sd_hwy</span> <span class="pl-k">=</span> sd(<span class="pl-smi">hwy</span>, <span class="pl-v">na.rm</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
+  ) %<span class="pl-k">&gt;</span>%
+  <span class="pl-c"><span class="pl-c">#</span> 5. 管道操作：按平均油耗降序排列结果</span>
+  arrange(desc(<span class="pl-smi">mean_hwy</span>))
+
+<span class="pl-smi">mpg_summary</span></pre></div>
+<p>对比：<br>
+直接使用R的基础用法：</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-smi">avg_hwy_base</span> <span class="pl-k">&lt;-</span> tapply(<span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">hwy</span>, <span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">drv</span>, <span class="pl-smi">mean</span>)
+<span class="pl-smi">count_base</span> <span class="pl-k">&lt;-</span> table(<span class="pl-smi">mpg</span><span class="pl-k">$</span><span class="pl-smi">drv</span>)</pre></div>
+<p>劣势：使用 tapply，只能聚合一列</p>
+<h3>6. 数据可视化：<code class="notranslate">ggplot2</code></h3>
+<p><strong>目标：</strong> 绘制**发动机排量（<code class="notranslate">displ</code>）<strong>与</strong>高速油耗（<code class="notranslate">hwy</code>）<strong>之间的关系，并按</strong>汽车类型（<code class="notranslate">class</code>）**着色。</p>
+<p><code class="notranslate">ggplot2</code> 是 <code class="notranslate">tidyverse</code> 的可视化组件，基于图形语法（Grammar of Graphics）。</p>
+<div class="highlight highlight-source-r"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 使用 ggplot2 绘制散点图</span>
+<span class="pl-smi">mpg</span> %<span class="pl-k">&gt;</span>%
+  ggplot(aes(<span class="pl-v">x</span> <span class="pl-k">=</span> <span class="pl-smi">displ</span>, <span class="pl-v">y</span> <span class="pl-k">=</span> <span class="pl-smi">hwy</span>, <span class="pl-v">color</span> <span class="pl-k">=</span> <span class="pl-smi">class</span>)) <span class="pl-k">+</span> <span class="pl-c"><span class="pl-c">#</span> 1. 定义数据和映射 (aes)</span>
+  geom_point() <span class="pl-k">+</span>                                   <span class="pl-c"><span class="pl-c">#</span> 2. 添加几何对象 (散点图)</span>
+  geom_smooth(<span class="pl-v">method</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>lm<span class="pl-pds">"</span></span>, <span class="pl-v">se</span> <span class="pl-k">=</span> <span class="pl-c1">FALSE</span>) <span class="pl-k">+</span>         <span class="pl-c"><span class="pl-c">#</span> 3. 添加线性回归趋势线</span>
+  labs(                                            <span class="pl-c"><span class="pl-c">#</span> 4. 添加标签</span>
+    <span class="pl-v">title</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>发动机排量与高速油耗的关系<span class="pl-pds">"</span></span>,
+    <span class="pl-v">x</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>发动机排量 (L)<span class="pl-pds">"</span></span>,
+    <span class="pl-v">y</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>高速油耗 (MPG)<span class="pl-pds">"</span></span>,
+    <span class="pl-v">color</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>汽车类型<span class="pl-pds">"</span></span>
+  ) <span class="pl-k">+</span>
+  theme_minimal() <span class="pl-c"><span class="pl-c">#</span> 5. 应用简洁主题</span></pre></div></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://lmhstart.github.io">B L O G</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","lmhstart/lmhstart.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
