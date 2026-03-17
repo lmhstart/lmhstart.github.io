@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://lmhstart.github.io/post/python-shu-ju-jie-gou-zhi-zi-fu-chuan.html">
 <meta property="og:image" content="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg">
 <title>python数据结构之字符串</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -43,7 +43,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     body {padding: 8px;}
     .postTitle{font-size:24px;}
 }
-
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
 </style>
 
 
@@ -81,192 +91,173 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>所谓<strong>字符串</strong>，就是<strong>由零个或多个字符组成的有限序列</strong>，一般记为：</p>
 <p>s=a1a2⋯an,,,,,(0≤n≤∞)</p>
 <p>在 Python 程序中，我们把单个或多个字符用单引号或者双引号包围起来，就可以表示一个字符串。字符串中的字符可以是特殊符号、英文字母、中文字符、日文的平假名或片假名、希腊字母、Emoji 字符（如：💩、🐷、🀄️）等。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = 'hello, world!'
-s2 = "你好，世界！❤️"
-s3 = '''hello,
-wonderful
-world!'''
-print(s1)
-print(s2)
-print(s3)
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world!'</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">"你好，世界！❤️"</span>
+<span class="pl-s1">s3</span> <span class="pl-c1">=</span> <span class="pl-s">'''hello,</span>
+<span class="pl-s">wonderful</span>
+<span class="pl-s">world!'''</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">s3</span>)</pre></div>
 <h4>转义字符</h4>
 <p>我们可以在字符串中使用<code class="notranslate">\</code>（反斜杠）来表示转义，也就是说<code class="notranslate">\</code>后面的字符不再是它原来的意义，例如：<code class="notranslate">\n</code>不是代表字符<code class="notranslate">\</code>和字符<code class="notranslate">n</code>，而是表示换行；<code class="notranslate">\t</code>也不是代表字符<code class="notranslate">\</code>和字符<code class="notranslate">t</code>，而是表示制表符。所以如果字符串本身又包含了<code class="notranslate">'</code>、<code class="notranslate">"</code>、<code class="notranslate">\</code>这些特殊的字符，必须要通过<code class="notranslate">\</code>进行转义处理。例如要输出一个带单引号或反斜杠的字符串，需要用如下所示的方法。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = '\'hello, world!\''
-s2 = '\\hello, world!\\'
-print(s1)
-print(s2)
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'<span class="pl-cce">\'</span>hello, world!<span class="pl-cce">\'</span>'</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'<span class="pl-cce">\\</span>hello, world!<span class="pl-cce">\\</span>'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>)</pre></div>
 <h4>原始字符串</h4>
 <p>Python 中有一种以<code class="notranslate">r</code>或<code class="notranslate">R</code>开头的字符串，这种字符串被称为原始字符串，意思是字符串中的每个字符都是它本来的含义，没有所谓的转义字符。例如，在字符串<code class="notranslate">'hello\n'</code>中，<code class="notranslate">\n</code>表示换行；而在<code class="notranslate">r'hello\n'</code>中，<code class="notranslate">\n</code>不再表示换行，就是字符<code class="notranslate">\</code>和字符<code class="notranslate">n</code>。大家可以运行下面的代码，看看会输出什么。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = '\it \is \time \to \read \now'
-s2 = r'\it \is \time \to \read \now'
-print(s1)
-print(s2)
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'\it \is <span class="pl-cce">\t</span>ime <span class="pl-cce">\t</span>o <span class="pl-cce">\r</span>ead <span class="pl-cce">\n</span>ow'</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">r'\it \is \time \to \read \now'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>)</pre></div>
 <blockquote>
 <p><strong>说明</strong>：上面的变量<code class="notranslate">s1</code>中，<code class="notranslate">\t</code>、<code class="notranslate">\r</code>和<code class="notranslate">\n</code>都是转义字符。<code class="notranslate">\t</code>是制表符（table），<code class="notranslate">\n</code>是换行符（new line），<code class="notranslate">\r</code>是回车符（carriage return）相当于让输出回到了行首。对比一下两个<code class="notranslate">print</code>函数的输出，看看到底有什么区别！</p>
 </blockquote>
 <h4>字符的特殊表示</h4>
 <p>Python 中还允许在<code class="notranslate">\</code>后面还可以跟一个八进制或者十六进制数来表示字符，例如<code class="notranslate">\141</code>和<code class="notranslate">\x61</code>都代表小写字母<code class="notranslate">a</code>，前者是八进制的表示法，后者是十六进制的表示法。另外一种表示字符的方式是在<code class="notranslate">\u</code>后面跟 Unicode 字符编码，例如<code class="notranslate">\u9a86\u660a</code>代表的是中文“骆昊”。运行下面的代码，看看输出了什么。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = '\141\142\143\x61\x62\x63'
-s2 = '\u9a86\u660a'
-print(s1)
-print(s2)
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'<span class="pl-cce">\141</span><span class="pl-cce">\142</span><span class="pl-cce">\143</span><span class="pl-cce">\x61</span><span class="pl-cce">\x62</span><span class="pl-cce">\x63</span>'</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'<span class="pl-cce">\u9a86</span><span class="pl-cce">\u660a</span>'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>)</pre></div>
 <h3>字符串的运算</h3>
 <p>Python 语言为字符串类型提供了非常丰富的运算符，有很多运算符跟列表类型的运算符作用类似。例如，我们可以使用<code class="notranslate">+</code>运算符来实现字符串的拼接，可以使用<code class="notranslate">*</code>运算符来重复一个字符串的内容，可以使用<code class="notranslate">in</code>和<code class="notranslate">not in</code>来判断一个字符串是否包含另外一个字符串，我们也可以用<code class="notranslate">[]</code>和<code class="notranslate">[:]</code>运算符从字符串取出某个字符或某些字符。</p>
 <h4>拼接和重复</h4>
 <p>下面的例子演示了使用<code class="notranslate">+</code>和<code class="notranslate">*</code>运算符来实现字符串的拼接和重复操作。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = 'hello' + ', ' + 'world'
-print(s1)    # hello, world
-s2 = '!' * 3
-print(s2)    # !!!
-s1 += s2
-print(s1)    # hello, world!!!
-s1 *= 2
-print(s1)    # hello, world!!!hello, world!!!
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'hello'</span> <span class="pl-c1">+</span> <span class="pl-s">', '</span> <span class="pl-c1">+</span> <span class="pl-s">'world'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)    <span class="pl-c"># hello, world</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'!'</span> <span class="pl-c1">*</span> <span class="pl-c1">3</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>)    <span class="pl-c"># !!!</span>
+<span class="pl-s1">s1</span> <span class="pl-c1">+=</span> <span class="pl-s1">s2</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)    <span class="pl-c"># hello, world!!!</span>
+<span class="pl-s1">s1</span> <span class="pl-c1">*=</span> <span class="pl-c1">2</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)    <span class="pl-c"># hello, world!!!hello, world!!!</span></pre></div>
 <p>用<code class="notranslate">*</code>实现字符串的重复是非常有意思的一个运算符，在很多编程语言中，要表示一个有10个<code class="notranslate">a</code>的字符串，你只能写成<code class="notranslate">'aaaaaaaaaa'</code>，但是在 Python 中，你可以写成<code class="notranslate">'a' * 10</code>。你可能觉得<code class="notranslate">'aaaaaaaaaa'</code>这种写法也没有什么不方便的，但是请想一想，如果字符<code class="notranslate">a</code>要重复100次或者1000次又会如何呢？</p>
 <h4>比较运算</h4>
 <p>对于两个字符串类型的变量，可以直接使用比较运算符来判断两个字符串的相等性或比较大小。需要说明的是，因为字符串在计算机内存中也是以二进制形式存在的，那么字符串的大小比较比的是每个字符对应的编码的大小。例如<code class="notranslate">A</code>的编码是<code class="notranslate">65</code>， 而<code class="notranslate">a</code>的编码是<code class="notranslate">97</code>，所以<code class="notranslate">'A' &lt; 'a'</code>的结果相当于就是<code class="notranslate">65 &lt; 97</code>的结果，这里很显然是<code class="notranslate">True</code>；而<code class="notranslate">'boy' &lt; 'bad'</code>，因为第一个字符都是<code class="notranslate">'b'</code>比不出大小，所以实际比较的是第二个字符的大小，显然<code class="notranslate">'o' &lt; 'a'</code>的结果是<code class="notranslate">False</code>，所以<code class="notranslate">'boy' &lt; 'bad'</code>的结果是<code class="notranslate">False</code>。如果不清楚两个字符对应的编码到底是多少，可以使用<code class="notranslate">ord</code>函数来获得，之前我们有提到过这个函数。例如<code class="notranslate">ord('A')</code>的值是<code class="notranslate">65</code>，而<code class="notranslate">ord('昊')</code>的值是<code class="notranslate">26122</code>。下面的代码展示了字符串的比较运算，请大家仔细看看。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = 'a whole new world'
-s2 = 'hello world'
-print(s1 == s2)             # False
-print(s1 &lt; s2)              # True
-print(s1 == 'hello world')  # False
-print(s2 == 'hello world')  # True
-print(s2 != 'Hello world')  # True
-s3 = 'lmh'
-print(ord('l'))            # 108
-print(ord('m'))            # 109
-s4 = '王大锤'
-print(ord('王'))            # 29579
-print(ord('大'))            # 22823
-print(ord('锤'))            # 38180
-print(s3 &gt;= s4)             # True
-print(s3 != s4)             # True
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'a whole new world'</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'hello world'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span> <span class="pl-c1">==</span> <span class="pl-s1">s2</span>)             <span class="pl-c"># False</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span> <span class="pl-c1">&lt;</span> <span class="pl-s1">s2</span>)              <span class="pl-c"># True</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span> <span class="pl-c1">==</span> <span class="pl-s">'hello world'</span>)  <span class="pl-c"># False</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span> <span class="pl-c1">==</span> <span class="pl-s">'hello world'</span>)  <span class="pl-c"># True</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span> <span class="pl-c1">!=</span> <span class="pl-s">'Hello world'</span>)  <span class="pl-c"># True</span>
+<span class="pl-s1">s3</span> <span class="pl-c1">=</span> <span class="pl-s">'lmh'</span>
+<span class="pl-en">print</span>(<span class="pl-en">ord</span>(<span class="pl-s">'l'</span>))            <span class="pl-c"># 108</span>
+<span class="pl-en">print</span>(<span class="pl-en">ord</span>(<span class="pl-s">'m'</span>))            <span class="pl-c"># 109</span>
+<span class="pl-s1">s4</span> <span class="pl-c1">=</span> <span class="pl-s">'王大锤'</span>
+<span class="pl-en">print</span>(<span class="pl-en">ord</span>(<span class="pl-s">'王'</span>))            <span class="pl-c"># 29579</span>
+<span class="pl-en">print</span>(<span class="pl-en">ord</span>(<span class="pl-s">'大'</span>))            <span class="pl-c"># 22823</span>
+<span class="pl-en">print</span>(<span class="pl-en">ord</span>(<span class="pl-s">'锤'</span>))            <span class="pl-c"># 38180</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s3</span> <span class="pl-c1">&gt;=</span> <span class="pl-s1">s4</span>)             <span class="pl-c"># True</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s3</span> <span class="pl-c1">!=</span> <span class="pl-s1">s4</span>)             <span class="pl-c"># True</span></pre></div>
 <h4>成员运算</h4>
 <p>Python 中可以用<code class="notranslate">in</code>和<code class="notranslate">not in</code>判断一个字符串中是否包含另外一个字符或字符串，跟列表类型一样，<code class="notranslate">in</code>和<code class="notranslate">not in</code>称为成员运算符，会产生布尔值<code class="notranslate">True</code>或<code class="notranslate">False</code>，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = 'hello, world'
-s2 = 'goodbye, world'
-print('wo' in s1)      # True
-print('wo' not in s2)  # False
-print(s2 in s1)        # False
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world'</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'goodbye, world'</span>
+<span class="pl-en">print</span>(<span class="pl-s">'wo'</span> <span class="pl-c1">in</span> <span class="pl-s1">s1</span>)      <span class="pl-c"># True</span>
+<span class="pl-en">print</span>(<span class="pl-s">'wo'</span> <span class="pl-c1"><span class="pl-c1">not</span> <span class="pl-c1">in</span></span> <span class="pl-s1">s2</span>)  <span class="pl-c"># False</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span> <span class="pl-c1">in</span> <span class="pl-s1">s1</span>)        <span class="pl-c"># False</span></pre></div>
 <h4>获取字符串长度</h4>
 <p>获取字符串长度跟获取列表元素个数一样，使用内置函数<code class="notranslate">len</code>，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello, world'
-print(len(s))                 # 12
-print(len('goodbye, world'))  # 14
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world'</span>
+<span class="pl-en">print</span>(<span class="pl-en">len</span>(<span class="pl-s1">s</span>))                 <span class="pl-c"># 12</span>
+<span class="pl-en">print</span>(<span class="pl-en">len</span>(<span class="pl-s">'goodbye, world'</span>))  <span class="pl-c"># 14</span></pre></div>
 <h4>索引和切片</h4>
 <p>字符串的索引和切片操作跟列表、元组几乎没有区别，因为字符串也是一种有序序列，可以通过正向或反向的整数索引访问其中的元素。但是有一点需要注意，因为<strong>字符串是不可变类型</strong>，所以<strong>不能通过索引运算修改字符串中的字符</strong>。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'abc123456'
-n = len(s)
-print(s[0], s[-n])    # a a
-print(s[n-1], s[-1])  # 6 6
-print(s[2], s[-7])    # c c
-print(s[5], s[-4])    # 3 3
-print(s[2:5])         # c12
-print(s[-7:-4])       # c12
-print(s[2:])          # c123456
-print(s[:2])          # ab
-print(s[::2])         # ac246
-print(s[::-1])        # 654321cba
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'abc123456'</span>
+<span class="pl-s1">n</span> <span class="pl-c1">=</span> <span class="pl-en">len</span>(<span class="pl-s1">s</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-c1">0</span>], <span class="pl-s1">s</span>[<span class="pl-c1">-</span><span class="pl-s1">n</span>])    <span class="pl-c"># a a</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-s1">n</span><span class="pl-c1">-</span><span class="pl-c1">1</span>], <span class="pl-s1">s</span>[<span class="pl-c1">-</span><span class="pl-c1">1</span>])  <span class="pl-c"># 6 6</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-c1">2</span>], <span class="pl-s1">s</span>[<span class="pl-c1">-</span><span class="pl-c1">7</span>])    <span class="pl-c"># c c</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-c1">5</span>], <span class="pl-s1">s</span>[<span class="pl-c1">-</span><span class="pl-c1">4</span>])    <span class="pl-c"># 3 3</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-c1">2</span>:<span class="pl-c1">5</span>])         <span class="pl-c"># c12</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-c1">-</span><span class="pl-c1">7</span>:<span class="pl-c1">-</span><span class="pl-c1">4</span>])       <span class="pl-c"># c12</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-c1">2</span>:])          <span class="pl-c"># c123456</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[:<span class="pl-c1">2</span>])          <span class="pl-c"># ab</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[::<span class="pl-c1">2</span>])         <span class="pl-c"># ac246</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>[::<span class="pl-c1">-</span><span class="pl-c1">1</span>])        <span class="pl-c"># 654321cba</span></pre></div>
 <p>需要再次提醒大家注意的是，在进行索引运算时，如果索引越界，会引发<code class="notranslate">IndexError</code>异常，错误提示信息为：<code class="notranslate">string index out of range</code>（字符串索引超出范围）。</p>
 <h3>字符的遍历</h3>
 <p>如果希望遍历字符串中的每个字符，可以使用<code class="notranslate">for-in</code>循环，有如下所示的两种方式。</p>
 <p>方式一：</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello'
-for i in range(len(s)):
-    print(s[i])
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello'</span>
+<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-en">len</span>(<span class="pl-s1">s</span>)):
+    <span class="pl-en">print</span>(<span class="pl-s1">s</span>[<span class="pl-s1">i</span>])</pre></div>
 <p>方式二：</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello'
-for elem in s:
-    print(elem)
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello'</span>
+<span class="pl-k">for</span> <span class="pl-s1">elem</span> <span class="pl-c1">in</span> <span class="pl-s1">s</span>:
+    <span class="pl-en">print</span>(<span class="pl-s1">elem</span>)</pre></div>
 <h3>字符串的方法</h3>
 <p>在 Python 中，我们可以通过字符串类型自带的方法对字符串进行操作和处理，假设我们有名为<code class="notranslate">foo</code>的字符串，字符串有名为<code class="notranslate">bar</code>的方法，那么使用字符串方法的语法是：<code class="notranslate">foo.bar()</code>，这是一种通过对象引用调用对象方法的语法，跟前面使用列表方法的语法是一样的。</p>
 <h4>大小写相关操作</h4>
 <p>下面的代码演示了和字符串大小写变换相关的方法。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = 'hello, world!'
-# 字符串首字母大写
-print(s1.capitalize())  # Hello, world!
-# 字符串每个单词首字母大写
-print(s1.title())       # Hello, World!
-# 字符串变大写
-print(s1.upper())       # HELLO, WORLD!
-s2 = 'GOODBYE'
-# 字符串变小写
-print(s2.lower())       # goodbye
-# 检查s1和s2的值
-print(s1)               # hello, world
-print(s2)               # GOODBYE
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world!'</span>
+<span class="pl-c"># 字符串首字母大写</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">capitalize</span>())  <span class="pl-c"># Hello, world!</span>
+<span class="pl-c"># 字符串每个单词首字母大写</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">title</span>())       <span class="pl-c"># Hello, World!</span>
+<span class="pl-c"># 字符串变大写</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">upper</span>())       <span class="pl-c"># HELLO, WORLD!</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'GOODBYE'</span>
+<span class="pl-c"># 字符串变小写</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>.<span class="pl-c1">lower</span>())       <span class="pl-c"># goodbye</span>
+<span class="pl-c"># 检查s1和s2的值</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>)               <span class="pl-c"># hello, world</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>)               <span class="pl-c"># GOODBYE</span></pre></div>
 <blockquote>
 <p><strong>说明</strong>：由于字符串是不可变类型，使用字符串的方法对字符串进行操作会产生新的字符串，但是原来变量的值并没有发生变化。所以上面的代码中，当我们最后检查<code class="notranslate">s1</code>和<code class="notranslate">s2</code>两个变量的值时，<code class="notranslate">s1</code>和<code class="notranslate">s2</code> 的值并没有发生变化。</p>
 </blockquote>
 <h4>查找操作</h4>
 <p>如果想在一个字符串中从前向后查找有没有另外一个字符串，可以使用字符串的<code class="notranslate">find</code>或<code class="notranslate">index</code>方法。在使用<code class="notranslate">find</code>和<code class="notranslate">index</code>方法时还可以通过方法的参数来指定查找的范围，也就是查找不必从索引为<code class="notranslate">0</code>的位置开始。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello, world!'
-print(s.find('or'))      # 8
-print(s.find('or', 9))   # -1
-print(s.find('of'))      # -1
-print(s.index('or'))     # 8
-print(s.index('or', 9))  # ValueError: substring not found
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world!'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">find</span>(<span class="pl-s">'or'</span>))      <span class="pl-c"># 8</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">find</span>(<span class="pl-s">'or'</span>, <span class="pl-c1">9</span>))   <span class="pl-c"># -1</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">find</span>(<span class="pl-s">'of'</span>))      <span class="pl-c"># -1</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">index</span>(<span class="pl-s">'or'</span>))     <span class="pl-c"># 8</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">index</span>(<span class="pl-s">'or'</span>, <span class="pl-c1">9</span>))  <span class="pl-c"># ValueError: substring not found</span></pre></div>
 <blockquote>
 <p><strong>说明</strong>：<code class="notranslate">find</code>方法找不到指定的字符串会返回<code class="notranslate">-1</code>，<code class="notranslate">index</code>方法找不到指定的字符串会引发<code class="notranslate">ValueError</code>错误。</p>
 </blockquote>
 <p><code class="notranslate">find</code>和<code class="notranslate">index</code>方法还有逆向查找（从后向前查找）的版本，分别是<code class="notranslate">rfind</code>和<code class="notranslate">rindex</code>，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello world!'
-print(s.find('o'))       # 4
-print(s.rfind('o'))      # 7
-print(s.rindex('o'))     # 7
-# print(s.rindex('o', 8))  # ValueError: substring not found
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello world!'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">find</span>(<span class="pl-s">'o'</span>))       <span class="pl-c"># 4</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">rfind</span>(<span class="pl-s">'o'</span>))      <span class="pl-c"># 7</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">rindex</span>(<span class="pl-s">'o'</span>))     <span class="pl-c"># 7</span>
+<span class="pl-c"># print(s.rindex('o', 8))  # ValueError: substring not found</span></pre></div>
 <h4>性质判断</h4>
 <p>可以通过字符串的<code class="notranslate">startswith</code>、<code class="notranslate">endswith</code>来判断字符串是否以某个字符串开头和结尾；还可以用<code class="notranslate">is</code>开头的方法判断字符串的特征，这些方法都返回布尔值，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = 'hello, world!'
-print(s1.startswith('He'))   # False
-print(s1.startswith('hel'))  # True
-print(s1.endswith('!'))      # True
-s2 = 'abc123456'
-print(s2.isdigit())  # False
-print(s2.isalpha())  # False
-print(s2.isalnum())  # True
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world!'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">startswith</span>(<span class="pl-s">'He'</span>))   <span class="pl-c"># False</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">startswith</span>(<span class="pl-s">'hel'</span>))  <span class="pl-c"># True</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">endswith</span>(<span class="pl-s">'!'</span>))      <span class="pl-c"># True</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'abc123456'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>.<span class="pl-c1">isdigit</span>())  <span class="pl-c"># False</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>.<span class="pl-c1">isalpha</span>())  <span class="pl-c"># False</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>.<span class="pl-c1">isalnum</span>())  <span class="pl-c"># True</span></pre></div>
 <blockquote>
 <p><strong>说明</strong>：上面的<code class="notranslate">isdigit</code>用来判断字符串是不是完全由数字构成的，<code class="notranslate">isalpha</code>用来判断字符串是不是完全由字母构成的，这里的字母指的是 Unicode 字符但不包含 Emoji 字符，<code class="notranslate">isalnum</code>用来判断字符串是不是由字母和数字构成的。</p>
 </blockquote>
 <h4>格式化</h4>
 <p>在 Python 中，字符串类型可以通过<code class="notranslate">center</code>、<code class="notranslate">ljust</code>、<code class="notranslate">rjust</code>方法做居中、左对齐和右对齐的处理。如果要在字符串的左侧补零，也可以使用<code class="notranslate">zfill</code>方法。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello, world'
-print(s.center(20, '*'))  # ****hello, world****
-print(s.rjust(20))        #         hello, world
-print(s.ljust(20, '~'))   # hello, world~~~~~~~~
-print('33'.zfill(5))      # 00033
-print('-33'.zfill(5))     # -0033
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, world'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">center</span>(<span class="pl-c1">20</span>, <span class="pl-s">'*'</span>))  <span class="pl-c"># ****hello, world****</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">rjust</span>(<span class="pl-c1">20</span>))        <span class="pl-c">#         hello, world</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">ljust</span>(<span class="pl-c1">20</span>, <span class="pl-s">'~'</span>))   <span class="pl-c"># hello, world~~~~~~~~</span>
+<span class="pl-en">print</span>(<span class="pl-s">'33'</span>.<span class="pl-c1">zfill</span>(<span class="pl-c1">5</span>))      <span class="pl-c"># 00033</span>
+<span class="pl-en">print</span>(<span class="pl-s">'-33'</span>.<span class="pl-c1">zfill</span>(<span class="pl-c1">5</span>))     <span class="pl-c"># -0033</span></pre></div>
 <p>我们之前讲过，在用<code class="notranslate">print</code>函数输出字符串时，可以用下面的方式对字符串进行格式化。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">a = 321
-b = 123
-print('%d * %d = %d' % (a, b, a * b))
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">a</span> <span class="pl-c1">=</span> <span class="pl-c1">321</span>
+<span class="pl-s1">b</span> <span class="pl-c1">=</span> <span class="pl-c1">123</span>
+<span class="pl-en">print</span>(<span class="pl-s">'%d * %d = %d'</span> <span class="pl-c1">%</span> (<span class="pl-s1">a</span>, <span class="pl-s1">b</span>, <span class="pl-s1">a</span> <span class="pl-c1">*</span> <span class="pl-s1">b</span>))</pre></div>
 <p>当然，我们也可以用字符串的<code class="notranslate">format</code>方法来完成字符串的格式，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">a = 321
-b = 123
-print('{0} * {1} = {2}'.format(a, b, a * b))
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">a</span> <span class="pl-c1">=</span> <span class="pl-c1">321</span>
+<span class="pl-s1">b</span> <span class="pl-c1">=</span> <span class="pl-c1">123</span>
+<span class="pl-en">print</span>(<span class="pl-s">'{0} * {1} = {2}'</span>.<span class="pl-c1">format</span>(<span class="pl-s1">a</span>, <span class="pl-s1">b</span>, <span class="pl-s1">a</span> <span class="pl-c1">*</span> <span class="pl-s1">b</span>))</pre></div>
 <p>从 Python 3.6 开始，格式化字符串还有更为简洁的书写方式，就是在字符串前加上<code class="notranslate">f</code>来格式化字符串，在这种以<code class="notranslate">f</code>打头的字符串中，<code class="notranslate">{变量名}</code>是一个占位符，会被变量对应的值将其替换掉，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">a = 321
-b = 123
-print(f'{a} * {b} = {a * b}')
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">a</span> <span class="pl-c1">=</span> <span class="pl-c1">321</span>
+<span class="pl-s1">b</span> <span class="pl-c1">=</span> <span class="pl-c1">123</span>
+<span class="pl-en">print</span>(<span class="pl-s">f'<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">a</span><span class="pl-kos">}</span></span> * <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">b</span><span class="pl-kos">}</span></span> = <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">a</span> <span class="pl-c1">*</span> <span class="pl-s1">b</span><span class="pl-kos">}</span></span>'</span>)</pre></div>
 <p>如果需要进一步控制格式化语法中变量值的形式，可以参照下面的表格来进行字符串格式化操作。</p>
 <markdown-accessiblity-table><table role="table">
 <thead>
@@ -348,42 +339,37 @@ print(f'{a} * {b} = {a * b}')
 </table></markdown-accessiblity-table>
 <h4>修剪操作</h4>
 <p>字符串的<code class="notranslate">strip</code>方法可以帮我们获得将原字符串修剪掉左右两端指定字符之后的字符串，默认是修剪空格字符。这个方法非常有实用价值，可以用来将用户输入时不小心键入的头尾空格等去掉，<code class="notranslate">strip</code>方法还有<code class="notranslate">lstrip</code>和<code class="notranslate">rstrip</code>两个版本，相信从名字大家已经猜出来这两个方法是做什么用的。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s1 = '   jackfrued@126.com  '
-print(s1.strip())      # jackfrued@126.com
-s2 = '~你好，世界~'
-print(s2.lstrip('~'))  # 你好，世界~
-print(s2.rstrip('~'))  # ~你好，世界
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s1</span> <span class="pl-c1">=</span> <span class="pl-s">'   jackfrued@126.com  '</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s1</span>.<span class="pl-c1">strip</span>())      <span class="pl-c"># jackfrued@126.com</span>
+<span class="pl-s1">s2</span> <span class="pl-c1">=</span> <span class="pl-s">'~你好，世界~'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>.<span class="pl-c1">lstrip</span>(<span class="pl-s">'~'</span>))  <span class="pl-c"># 你好，世界~</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s2</span>.<span class="pl-c1">rstrip</span>(<span class="pl-s">'~'</span>))  <span class="pl-c"># ~你好，世界</span></pre></div>
 <h4>替换操作</h4>
 <p>如果希望用新的内容替换字符串中指定的内容，可以使用<code class="notranslate">replace</code>方法，代码如下所示。<code class="notranslate">replace</code>方法的第一个参数是被替换的内容，第二个参数是替换后的内容，还可以通过第三个参数指定替换的次数。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'hello, good world'
-print(s.replace('o', '@'))     # hell@, g@@d w@rld
-print(s.replace('o', '@', 1))  # hell@, good world
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'hello, good world'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">replace</span>(<span class="pl-s">'o'</span>, <span class="pl-s">'@'</span>))     <span class="pl-c"># hell@, g@@d w@rld</span>
+<span class="pl-en">print</span>(<span class="pl-s1">s</span>.<span class="pl-c1">replace</span>(<span class="pl-s">'o'</span>, <span class="pl-s">'@'</span>, <span class="pl-c1">1</span>))  <span class="pl-c"># hell@, good world</span></pre></div>
 <h4>拆分与合并</h4>
 <p>可以使用字符串的<code class="notranslate">split</code>方法将一个字符串拆分为多个字符串（放在一个列表中），也可以使用字符串的<code class="notranslate">join</code>方法将列表中的多个字符串连接成一个字符串，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'I love you'
-words = s.split()
-print(words)            # ['I', 'love', 'you']
-print('~'.join(words))  # I~love~you
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'I love you'</span>
+<span class="pl-s1">words</span> <span class="pl-c1">=</span> <span class="pl-s1">s</span>.<span class="pl-c1">split</span>()
+<span class="pl-en">print</span>(<span class="pl-s1">words</span>)            <span class="pl-c"># ['I', 'love', 'you']</span>
+<span class="pl-en">print</span>(<span class="pl-s">'~'</span>.<span class="pl-c1">join</span>(<span class="pl-s1">words</span>))  <span class="pl-c"># I~love~you</span></pre></div>
 <p>需要说明的是，<code class="notranslate">split</code>方法默认使用空格进行拆分，我们也可以指定其他的字符来拆分字符串，而且还可以指定最大拆分次数来控制拆分的效果，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">s = 'I#love#you#so#much'
-words = s.split('#')
-print(words)  # ['I', 'love', 'you', 'so', 'much']
-words = s.split('#', 2)
-print(words)  # ['I', 'love', 'you#so#much']
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">s</span> <span class="pl-c1">=</span> <span class="pl-s">'I#love#you#so#much'</span>
+<span class="pl-s1">words</span> <span class="pl-c1">=</span> <span class="pl-s1">s</span>.<span class="pl-c1">split</span>(<span class="pl-s">'#'</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">words</span>)  <span class="pl-c"># ['I', 'love', 'you', 'so', 'much']</span>
+<span class="pl-s1">words</span> <span class="pl-c1">=</span> <span class="pl-s1">s</span>.<span class="pl-c1">split</span>(<span class="pl-s">'#'</span>, <span class="pl-c1">2</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">words</span>)  <span class="pl-c"># ['I', 'love', 'you#so#much']</span></pre></div>
 <h4>编码和解码</h4>
 <p>Python 中除了字符串<code class="notranslate">str</code>类型外，还有一种表示二进制数据的字节串类型（<code class="notranslate">bytes</code>）。所谓字节串，就是<strong>由零个或多个字节组成的有限序列</strong>。通过字符串的<code class="notranslate">encode</code>方法，我们可以按照某种编码方式将字符串编码为字节串，我们也可以使用字节串的<code class="notranslate">decode</code>方法，将字节串解码为字符串，代码如下所示。</p>
-<pre lang="python" class="notranslate"><code class="notranslate">a = 'lmh'
-b = a.encode('utf-8')
-c = a.encode('gbk')
-print(b)                  # b'\xe9\xaa\x86\xe6\x98\x8a'
-print(c)                  # b'\xc2\xe6\xea\xbb'
-print(b.decode('utf-8'))  # lmh
-print(c.decode('gbk'))    # lmh
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">a</span> <span class="pl-c1">=</span> <span class="pl-s">'lmh'</span>
+<span class="pl-s1">b</span> <span class="pl-c1">=</span> <span class="pl-s1">a</span>.<span class="pl-c1">encode</span>(<span class="pl-s">'utf-8'</span>)
+<span class="pl-s1">c</span> <span class="pl-c1">=</span> <span class="pl-s1">a</span>.<span class="pl-c1">encode</span>(<span class="pl-s">'gbk'</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">b</span>)                  <span class="pl-c"># b'\xe9\xaa\x86\xe6\x98\x8a'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">c</span>)                  <span class="pl-c"># b'\xc2\xe6\xea\xbb'</span>
+<span class="pl-en">print</span>(<span class="pl-s1">b</span>.<span class="pl-c1">decode</span>(<span class="pl-s">'utf-8'</span>))  <span class="pl-c"># lmh</span>
+<span class="pl-en">print</span>(<span class="pl-s1">c</span>.<span class="pl-c1">decode</span>(<span class="pl-s">'gbk'</span>))    <span class="pl-c"># lmh</span></pre></div>
 <p>注意，如果编码和解码的方式不一致，会导致乱码问题（无法再现原始的内容）或引发<code class="notranslate">UnicodeDecodeError</code>错误，导致程序崩溃。</p>
 <h4>其他方法</h4>
 <p>对于字符串类型来说，还有一个常用的操作是对字符串进行匹配检查，即检查字符串是否满足某种特定的模式。例如，一个网站对用户注册信息中用户名和邮箱的检查，就属于模式匹配检查。实现模式匹配检查的工具叫做正则表达式，Python 语言通过标准库中的<code class="notranslate">re</code>模块提供了对正则表达式的支持，我们会在后续的课程中为大家讲解这个知识点。</p>
@@ -413,7 +399,7 @@ if(""!=""){
 </script></div>
 </body>
 <script>
-var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
 var utterancesLoad=0;
 
 let themeSettings={
@@ -487,7 +473,70 @@ function iFrameLoading(){
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
 
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
 
 </script>
 
