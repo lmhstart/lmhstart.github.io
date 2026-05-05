@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 商业银行管理 - 第7、8章练习题 详细解答
+
+---
+
+## 一、计算分析题（久期与凸性）
+
+**题目：** 某银行考虑投资面值1000元、到期期限5年、票面利率9%的债券，每半年付息一次，按面值销售。">
+<meta property="og:title" content="商业银行管理第7、8章练习题详细解答">
+<meta property="og:description" content="# 商业银行管理 - 第7、8章练习题 详细解答
+
+---
+
+## 一、计算分析题（久期与凸性）
+
+**题目：** 某银行考虑投资面值1000元、到期期限5年、票面利率9%的债券，每半年付息一次，按面值销售。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lmhstart.github.io/post/shang-ye-yin-xing-guan-li-di-7%E3%80%818-zhang-lian-xi-ti-xiang-xi-jie-da.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg">
+<title>商业银行管理第7、8章练习题详细解答</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">商业银行管理第7、8章练习题详细解答</h1>
+<div class="title-right">
+    <a href="https://lmhstart.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/lmhstart/lmhstart.github.io/issues/11" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>商业银行管理 - 第7、8章练习题 详细解答</h1>
+<hr>
+<h2>一、计算分析题（久期与凸性）</h2>
+<p><strong>题目：</strong> 某银行考虑投资面值1000元、到期期限5年、票面利率9%的债券，每半年付息一次，按面值销售。</p>
+<p><strong>已知条件：</strong></p>
+<ul>
+<li>面值 = 1000元</li>
+<li>期限 = 5年，半年付息 → 共10期</li>
+<li>票面利率 = 9%（年） → 每期票息 = 1000 × 9% ÷ 2 = <strong>45元</strong></li>
+<li>按面值销售 → 价格P = 1000元，到期收益率YTM = 9%（年），半年收益率 y = 4.5%</li>
+<li>第10期现金流 = 45 + 1000 = 1045元</li>
+</ul>
+<hr>
+<h3>1. 计算久期和凸性</h3>
+<h4>知识点：久期（Macaulay Duration）</h4>
+<p>久期是债券各期现金流现值加权平均的时间，公式：</p>
+<p>$$D = \frac{\sum_{t=1}^{n} t \times PV(CF_t)}{\sum_{t=1}^{n} PV(CF_t)} = \frac{\sum t \times PV(CF_t)}{P}$$</p>
+<p>对于半年付息债券，计算出的久期单位为<strong>半年</strong>，需除以2得到以年为单位的久期。</p>
+<h4>知识点：凸性（Convexity）</h4>
+<p>凸性衡量债券价格-收益率曲线的弯曲程度，是价格对收益率的<strong>二阶导数</strong>：</p>
+<p>$$C = \frac{1}{P \times (1+y)^2} \times \sum_{t=1}^{n} \frac{t(t+1) \times CF_t}{(1+y)^t}$$</p>
+<p>对于半年付息债券，凸性（年）= 凸性（半年）/ 4</p>
+<hr>
+<h4>计算过程：</h4>
+<p><strong>Step 1：计算每期现金流的现值和 t×PV</strong></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">时点t</th>
+<th align="center">现金流CF</th>
+<th align="center">贴现因子 1/(1.045)^t</th>
+<th align="center">PV=CF×贴现因子</th>
+<th align="center">t×PV</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^1 = 0.9569</td>
+<td align="center">43.06</td>
+<td align="center">43.06</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^2 = 0.9157</td>
+<td align="center">41.21</td>
+<td align="center">82.41</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^3 = 0.8762</td>
+<td align="center">39.43</td>
+<td align="center">118.29</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^4 = 0.8385</td>
+<td align="center">37.73</td>
+<td align="center">150.93</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^5 = 0.8024</td>
+<td align="center">36.11</td>
+<td align="center">180.54</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^6 = 0.7678</td>
+<td align="center">34.55</td>
+<td align="center">207.31</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^7 = 0.7348</td>
+<td align="center">33.07</td>
+<td align="center">231.46</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^8 = 0.7031</td>
+<td align="center">31.64</td>
+<td align="center">253.12</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">45</td>
+<td align="center">1/(1.045)^9 = 0.6729</td>
+<td align="center">30.28</td>
+<td align="center">272.53</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">1045</td>
+<td align="center">1/(1.045)^10 = 0.6439</td>
+<td align="center">672.88</td>
+<td align="center">6728.76</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>∑PV = 999.96 ≈ 1000</strong>（验证：按面值销售，PV之和应等于价格）</p>
+<p><strong>∑(t×PV) = 8268.41</strong></p>
+<p><strong>久期（半年）= 8268.41 ÷ 1000 = 8.2684（个半年）</strong></p>
+<p><strong>久期（年）= 8.2684 ÷ 2 = 4.1342 年</strong></p>
+<hr>
+<p><strong>Step 2：计算凸性</strong></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">时点t</th>
+<th align="center">t(t+1)×CF</th>
+<th align="center">1/(1.045)^(t+2)</th>
+<th align="center">t(t+1)×CF / (1.045)^(t+2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">1×2×45 = 90</td>
+<td align="center">0.8762</td>
+<td align="center">78.86</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2×3×45 = 270</td>
+<td align="center">0.8385</td>
+<td align="center">226.40</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">3×4×45 = 540</td>
+<td align="center">0.8024</td>
+<td align="center">433.30</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">4×5×45 = 900</td>
+<td align="center">0.7678</td>
+<td align="center">691.02</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">5×6×45 = 1350</td>
+<td align="center">0.7348</td>
+<td align="center">991.98</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">6×7×45 = 1890</td>
+<td align="center">0.7031</td>
+<td align="center">1328.86</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">7×8×45 = 2520</td>
+<td align="center">0.6729</td>
+<td align="center">1695.71</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">8×9×45 = 3240</td>
+<td align="center">0.6439</td>
+<td align="center">2086.24</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">9×10×45 = 4050</td>
+<td align="center">0.6161</td>
+<td align="center">2495.21</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">10×11×1045 = 114950</td>
+<td align="center">0.5896</td>
+<td align="center">67774.52</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>凸性分子之和 = 77802.10</strong></p>
+<p><strong>凸性（半年）= 77802.10 ÷ (1000 × 1.045²) = 77802.10 ÷ 1092.025 = 71.25</strong></p>
+<p><strong>凸性（年）= 71.25 ÷ 4 = 17.81</strong></p>
+<hr>
+<h4>参考答案：</h4>
+<ul>
+<li><strong>麦考雷久期 = 4.13 年</strong>（或 8.27 个半年）</li>
+<li><strong>凸性 = 17.81</strong></li>
+</ul>
+<hr>
+<h3>2. 预测利率从9%上升至10%时债券价格的波动</h3>
+<h4>知识点：修正久期</h4>
+<p>修正久期将久期转化为价格对利率变化的敏感度：</p>
+<p>$$D^* = \frac{D}{1 + y}$$</p>
+<p>其中 y 为每期收益率（半年 y = 0.045）。</p>
+<p>$$D^*_{年} = \frac{4.1342}{1.045} = 3.956$$</p>
+<h4>知识点：久期预测价格变动</h4>
+<p>$$\frac{\Delta P}{P} \approx -D^* \times \Delta y$$</p>
+<p>Δy = 10% - 9% = +1% = +0.01</p>
+<p><strong>仅用久期预测：ΔP/P ≈ -3.956 × 0.01 = -3.956%</strong></p>
+<p>即债券价格下跌约 <strong>3.96%</strong>，从1000元跌至约 <strong>960.44元</strong>。</p>
+<hr>
+<h4>知识点：加入凸性修正</h4>
+<p>$$\frac{\Delta P}{P} \approx -D^* \times \Delta y + \frac{1}{2} \times C \times (\Delta y)^2$$</p>
+<p><strong>久期+凸性预测：</strong><br>
+$$\frac{\Delta P}{P} = -3.956 \times 0.01 + \frac{1}{2} \times 17.81 \times (0.01)^2$$<br>
+$$= -0.03956 + 0.5 \times 17.81 \times 0.0001$$<br>
+$$= -0.03956 + 0.00089$$<br>
+$$= -0.03867 = -3.867%$$</p>
+<p>即债券价格下跌约 <strong>3.87%</strong>，从1000元跌至约 <strong>961.33元</strong>。</p>
+<hr>
+<h4>参考答案：</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>预测方法</th>
+<th>价格变动</th>
+<th>预测价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仅用久期</td>
+<td>-3.96%</td>
+<td>960.44元</td>
+</tr>
+<tr>
+<td>久期+凸性</td>
+<td>-3.87%</td>
+<td>961.33元</td>
+</tr>
+<tr>
+<td>差值</td>
+<td>凸性修正了0.09%</td>
+<td>+0.89元</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>关键结论：</strong> 利率上升时，仅用久期会<strong>高估</strong>价格下跌幅度（-3.96% vs -3.87%），凸性修正让预测更准确。</p>
+<hr>
+<h3>3. 久期利率风险管理的局限性及修正方法</h3>
+<h4>知识点：久期的三个局限性</h4>
+<p><strong>局限性1：线性近似误差</strong></p>
+<ul>
+<li>久期是价格-收益率关系的一阶导数，假设二者为<strong>线性关系</strong></li>
+<li>实际上债券价格与收益率是<strong>凸性关系</strong>（曲线而非直线）</li>
+<li>利率变动幅度越大，久期预测误差越大</li>
+</ul>
+<p><strong>局限性2：假设收益率曲线平行移动</strong></p>
+<ul>
+<li>久期假设所有期限的利率同幅度变动</li>
+<li>现实中，短期利率和长期利率变动幅度往往不同（收益率曲线非平行移动）</li>
+</ul>
+<p><strong>局限性3：未考虑嵌入式期权</strong></p>
+<ul>
+<li>对于含权债券（可赎回、可回售），现金流不确定</li>
+<li>久期无法准确衡量此类债券的利率风险</li>
+</ul>
+<h4>知识点：修正方法</h4>
+<p><strong>方法1：凸性修正（最常用）</strong><br>
+$$\frac{\Delta P}{P} \approx -D^* \times \Delta y + \frac{1}{2} \times C \times (\Delta y)^2$$</p>
+<ul>
+<li>加入二阶项（凸性），将线性近似升级为二次近似</li>
+<li>利率变动越大，凸性修正越重要</li>
+<li>凸性对投资者有利：利率上升时价格跌得少，利率下降时价格涨得多</li>
+</ul>
+<p><strong>方法2：使用有效久期（Effective Duration）</strong></p>
+<ul>
+<li>适用于含权债券</li>
+<li>通过实际计算不同利率情景下的价格来估算久期</li>
+<li>公式：D_eff = (P_down - P_up) / (2 × P₀ × Δy)</li>
+</ul>
+<p><strong>方法3：关键利率久期（Key Rate Duration）</strong></p>
+<ul>
+<li>分别衡量不同期限利率变动对价格的影响</li>
+<li>解决收益率曲线非平行移动问题</li>
+</ul>
+<hr>
+<h2>二、计算题（生息资产与计息负债）</h2>
+<h3>知识点回顾</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>概念</th>
+<th>公式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>净利息收入</td>
+<td>总利息收入 - 总利息支出</td>
+<td>银行核心盈利</td>
+</tr>
+<tr>
+<td>净利息差(NIS)</td>
+<td>生息资产平均收益率 - 计息负债平均付息率</td>
+<td>存贷利差纯度</td>
+</tr>
+<tr>
+<td>净利息收益率(NIM)</td>
+<td>净利息收入 ÷ 生息资产平均余额</td>
+<td>生息资产整体赚钱效率</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3>计算过程</h3>
+<p><strong>（1）总生息资产平均余额</strong><br>
+= 22,248,094 + 9,001,876 + 2,991,645 + 1,866,884<br>
+= <strong>36,108,499（百万元）</strong></p>
+<p><strong>（2）总利息收入</strong><br>
+= 900,149 + 298,722 + 45,425 + 36,080<br>
+= <strong>1,280,376（百万元）</strong></p>
+<p><strong>（3）总生息资产平均收益率</strong><br>
+= 1,280,376 ÷ 36,108,499<br>
+= <strong>3.55%</strong></p>
+<p><strong>（4）总资产</strong><br>
+= 总生息资产 + 非生息资产 - 资产减值准备<br>
+= 36,108,499 + 2,520,529 - 683,492<br>
+= <strong>37,945,536（百万元）</strong></p>
+<p><strong>（5）总计息负债平均余额</strong><br>
+= 27,364,627 + 3,794,532 + 1,132,767<br>
+= <strong>32,291,926（百万元）</strong></p>
+<p><strong>（6）总利息支出</strong><br>
+= 480,083 + 70,732 + 35,874<br>
+= <strong>586,689（百万元）</strong></p>
+<p><strong>（7）总计息负债平均付息率</strong><br>
+= 586,689 ÷ 32,291,926<br>
+= <strong>1.82%</strong></p>
+<p><strong>（8）净利息收入</strong><br>
+= 1,280,376 - 586,689<br>
+= <strong>693,687（百万元）</strong></p>
+<p><strong>（9）净利息差（NIS）</strong><br>
+= 总生息资产平均收益率 - 总计息负债平均付息率<br>
+= 3.55% - 1.82%<br>
+= <strong>1.73%</strong></p>
+<p><strong>（10）净利息收益率（NIM）</strong><br>
+= 693,687 ÷ 36,108,499<br>
+= <strong>1.92%</strong></p>
+<hr>
+<h3>填表答案汇总</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">编号</th>
+<th>指标</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">(1)</td>
+<td>总生息资产平均余额</td>
+<td>36,108,499 百万元</td>
+</tr>
+<tr>
+<td align="center">(2)</td>
+<td>总利息收入</td>
+<td>1,280,376 百万元</td>
+</tr>
+<tr>
+<td align="center">(3)</td>
+<td>总生息资产平均收益率</td>
+<td>3.55%</td>
+</tr>
+<tr>
+<td align="center">(4)</td>
+<td>总资产</td>
+<td>37,945,536 百万元</td>
+</tr>
+<tr>
+<td align="center">(5)</td>
+<td>总计息负债平均余额</td>
+<td>32,291,926 百万元</td>
+</tr>
+<tr>
+<td align="center">(6)</td>
+<td>总利息支出</td>
+<td>586,689 百万元</td>
+</tr>
+<tr>
+<td align="center">(7)</td>
+<td>总计息负债平均付息率</td>
+<td>1.82%</td>
+</tr>
+<tr>
+<td align="center">(8)</td>
+<td>净利息收入</td>
+<td>693,687 百万元</td>
+</tr>
+<tr>
+<td align="center">(9)</td>
+<td>净利息差(NIS)</td>
+<td>1.73%</td>
+</tr>
+<tr>
+<td align="center">(10)</td>
+<td>净利息收益率(NIM)</td>
+<td>1.92%</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>验证逻辑：</strong> NIS(1.73%) &lt; NIM(1.92%)? 不一定，让我们检查——等等，NIM应该小于NIS才对（因为存在不生息资产）。让我重新验证...</p>
+<p>实际上，NIM &lt; NIS的关系是针对<strong>同一家银行的总资产</strong>而言的，因为NIM的分母是总生息资产（而非总资产）。在这个定义下，NIM可以大于或小于NIS，取决于计算方式。</p>
+<p>重新理清：</p>
+<ul>
+<li>NIS = 生息资产收益率 - 计息负债成本率 = 3.55% - 1.82% = 1.73%</li>
+<li>NIM = 净利息收入 / 总生息资产 = 693,687/36,108,499 = 1.92%</li>
+</ul>
+<p>这里NIM &gt; NIS，是因为净利息收入中还包含了生息资产和计息负债<strong>结构差异</strong>带来的收益。这体现了生息资产规模(36,108,499)大于计息负债规模(32,291,926)带来的优势。—— 这是正确的，NIM确实可以大于NIS，因为银行有一部分负债是不计息的（如活期存款中的非计息部分），这部分"免费"资金提升了NIM。</p>
+<hr>
+<h2>三、利率互换计算分析题</h2>
+<h3>题目分析</h3>
+<p><strong>已知：</strong></p>
+<ul>
+<li>资产端：100万美元贷款，3年期，固定利率7%（半年付息）</li>
+<li>负债端：100万美元欧洲美元存款，6个月LIBOR浮动利率</li>
+<li>互换：3年期，互换利率3.15%，名义本金100万美元，浮动端参考6个月LIBOR</li>
+</ul>
+<hr>
+<h3>（1）该银行面临什么风险？</h3>
+<h4>知识点：利率敏感性缺口判断</h4>
+<p><strong>该交易结构：</strong></p>
+<ul>
+<li>资产：固定利率7% → 非利率敏感性资产</li>
+<li>负债：浮动利率（LIBOR）→ 利率敏感性负债</li>
+</ul>
+<p><strong>缺口判断：</strong> IRSA = 0，IRSL = 100万<br>
+<strong>GAP = 0 - 100万 = -100万（负缺口）</strong></p>
+<h4>面临的风险：</h4>
+<p><strong>利率上升风险：</strong> 该银行存在利率敏感性<strong>负缺口</strong>。当LIBOR上升时：</p>
+<ul>
+<li>贷款利息收入不变（固定7%）</li>
+<li>存款利息支出随LIBOR上升而增加</li>
+<li><strong>净利差 = 7% - LIBOR</strong>，LIBOR越高，净利差越小</li>
+<li>当LIBOR &gt; 7%时，银行出现亏损</li>
+</ul>
+<p><strong>具体量化：</strong></p>
+<ul>
+<li>当前 LIBOR = ?（题目未给当前值）</li>
+<li>临界点：LIBOR = 7% 时，净利差 = 0</li>
+<li>LIBOR = 8% 时，净亏损 = 1%（即每年亏损1万美元）</li>
+</ul>
+<p><strong>核心风险：</strong> 资产负债<strong>期限错配</strong>+<strong>利率基准错配</strong>导致的利率风险。银行以短期浮动利率负债支持长期固定利率资产，承担了全部的利率上升风险。</p>
+<hr>
+<h3>（2）互换对冲后的收入、支付和净利差</h3>
+<h4>知识点：利率互换对冲策略</h4>
+<p><strong>对冲逻辑：</strong></p>
+<ul>
+<li>银行问题是"利率上升→负债成本↑→净利差↓"</li>
+<li>需要获得"利率上升时受益"的头寸来对冲</li>
+<li><strong>策略：在互换中充当固定利率付款方、浮动利率收款方</strong></li>
+</ul>
+<p>即：银行支付固定利率 3.15%、收取 LIBOR。</p>
+<p><strong>互换交易后的现金流分析：</strong></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>现金流来源</th>
+<th>收入</th>
+<th>支付</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>贷款（资产）</td>
+<td>+7%（固定）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>存款（负债）</td>
+<td>—</td>
+<td>-LIBOR（浮动）</td>
+</tr>
+<tr>
+<td>利率互换</td>
+<td>+LIBOR（浮动收入）</td>
+<td>-3.15%（固定支付）</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>7% + LIBOR</strong></td>
+<td><strong>LIBOR + 3.15%</strong></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>净利差 = 总收入 - 总支付</strong></p>
+<p>= (7% + LIBOR) - (LIBOR + 3.15%)</p>
+<p>= 7% - 3.15%</p>
+<p>= <strong>3.85%</strong></p>
+<h4>知识点：对冲效果分析</h4>
+<p><strong>对冲前：</strong> 净利差 = 7% - LIBOR（随LIBOR波动，有风险）</p>
+<p><strong>对冲后：</strong> 净利差 = 3.85%（固定，无风险）</p>
+<hr>
+<h4>填表答案：</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th></th>
+<th>收入</th>
+<th>支付</th>
+<th>净利差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>对冲后</strong></td>
+<td>7% + LIBOR</td>
+<td>LIBOR + 3.15%</td>
+<td><strong>3.85%</strong></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>关键结论：</strong></p>
+<ol>
+<li>银行通过利率互换将<strong>浮动的净利差（7%-LIBOR）</strong> 转换为<strong>固定的净利差（3.85%）</strong></li>
+<li>银行付出了"减少潜在收益"的代价（利率下降时原本能多赚），换来了"锁定收益、消除风险"</li>
+<li>3.85%的固定净利差中，3.15%是互换的固定利率支付，实际上净赚的是 7% - 3.15%</li>
+</ol>
+<hr>
+<hr>
+<h2>扩展练习题</h2>
+<h3>扩展题1：久期综合计算</h3>
+<p>某银行持有以下两种债券：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th></th>
+<th>债券A</th>
+<th>债券B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面值</td>
+<td>1000元</td>
+<td>1000元</td>
+</tr>
+<tr>
+<td>票面利率</td>
+<td>6%（年付）</td>
+<td>0%（零息）</td>
+</tr>
+<tr>
+<td>期限</td>
+<td>3年</td>
+<td>5年</td>
+</tr>
+<tr>
+<td>当前YTM</td>
+<td>8%</td>
+<td>7%</td>
+</tr>
+<tr>
+<td>持有数量</td>
+<td>500张</td>
+<td>200张</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>（1）</strong> 分别计算债券A和债券B的麦考雷久期和修正久期。</p>
+<p><strong>（2）</strong> 计算该债券组合的加权平均久期。</p>
+<p><strong>（3）</strong> 如果市场利率整体下降0.5%，预测该组合市值的变动金额。</p>
+<hr>
+<h3>扩展题2：利率敏感性缺口实战</h3>
+<p>某银行资产负债表如下（单位：百万元）：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>资产</th>
+<th>金额</th>
+<th>利率类型</th>
+<th>负债及权益</th>
+<th>金额</th>
+<th>利率类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>短期贷款</td>
+<td>800</td>
+<td>浮动（参考LPR）</td>
+<td>活期存款</td>
+<td>500</td>
+<td>不付息</td>
+</tr>
+<tr>
+<td>长期贷款</td>
+<td>600</td>
+<td>固定5%</td>
+<td>定期存款</td>
+<td>700</td>
+<td>固定2%</td>
+</tr>
+<tr>
+<td>国债</td>
+<td>300</td>
+<td>固定3%</td>
+<td>同业拆入</td>
+<td>200</td>
+<td>浮动</td>
+</tr>
+<tr>
+<td>现金</td>
+<td>100</td>
+<td>—</td>
+<td>权益</td>
+<td>400</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>假设所有浮动利率资产负债在1年内重定价。</p>
+<p><strong>（1）</strong> 计算1年期利率敏感性缺口和累计缺口。</p>
+<p><strong>（2）</strong> 如果市场利率下降0.5%，净利息收入变化多少？</p>
+<p><strong>（3）</strong> 如果银行预期利率上升，应如何调整缺口？请给出两种具体操作建议。</p>
+<hr>
+<h3>扩展题3：久期缺口管理</h3>
+<p>某银行数据（单位：百万元）：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>项目</th>
+<th>市值</th>
+<th>久期(年)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商业贷款</td>
+<td>5000</td>
+<td>3.2</td>
+</tr>
+<tr>
+<td>抵押贷款</td>
+<td>3000</td>
+<td>6.5</td>
+</tr>
+<tr>
+<td>国债投资</td>
+<td>1500</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td>现金</td>
+<td>500</td>
+<td>0</td>
+</tr>
+<tr>
+<td>存款</td>
+<td>7500</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>同业借款</td>
+<td>1500</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>权益</td>
+<td>1000</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>当前市场利率为6%。</p>
+<p><strong>（1）</strong> 计算资产组合和负债组合的加权平均久期。</p>
+<p><strong>（2）</strong> 计算久期缺口和金额久期缺口。</p>
+<p><strong>（3）</strong> 如果利率上升1%，银行的股权市值变化多少？这说明了什么风险？</p>
+<hr>
+<h3>扩展题4：衍生工具策略对照</h3>
+<p>某银行存在以下情况，请分别给出合适的期货、期权、互换策略：</p>
+<p><strong>情况A：</strong> 银行IRSA &gt; IRSL（正敏感性缺口），预期利率下降。</p>
+<p><strong>情况B：</strong> 银行 DA &gt; DL（正久期缺口），预期利率上升。</p>
+<p><strong>情况C：</strong> 银行持有大量固定利率长期国债，担心利率上升导致债券组合贬值。</p>
+<hr>
+<h3>扩展题5：利率互换设计</h3>
+<p>某银行发放了500万美元的3年期浮动利率贷款（参考6个月LIBOR+2%），并通过发行3年期固定利率4%的债券为此融资。</p>
+<p><strong>（1）</strong> 该银行面临什么风险？</p>
+<p><strong>（2）</strong> 设计一个利率互换方案对冲该风险（说明名义本金、支付方向、互换利率需满足的条件）。</p>
+<p><strong>（3）</strong> 如果互换利率为3.5%，对冲后的净利差是多少？</p>
+<hr></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://lmhstart.github.io">B L O G</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","lmhstart/lmhstart.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+<script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</html>
