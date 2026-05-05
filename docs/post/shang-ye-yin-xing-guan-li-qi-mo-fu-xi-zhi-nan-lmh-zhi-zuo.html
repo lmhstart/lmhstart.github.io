@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 商业银行管理 - 期末复习指南
+
+## 考试结构
+- A/B卷均为 **4道大题**
+- 前3道：**计算分析题**（重点关注公式、指标计算和策略运用）
+- 第4道：**材料分析题**（重点关注案例讨论和理论应用）
+- 复习范围：课后习题 + 课堂讨论案例 + 工行年报前80页
+
+---
+
+## 一、计算分析题核心考点（前三大题）
+
+### 1. 久期计算与利率风险管理（第7章）⭐⭐⭐⭐⭐
+
+**麦考雷久期（Macaulay Duration）：**
+- 定义：债券各期现金流现值的加权平均时间，度量收回投资资金所需的平均时间
+- 公式：D = Σ[t × PV(CFt)] / P
+
+**修正久期（Modified Duration）：**
+- D* = D / (1 + y)，其中 y 为到期收益率
+
+**债券价格变动近似：**
+- ΔP/P ≈ -D* × Δy
+- 即：债券价格变动百分比 ≈ -修正久期 × 到期收益率变动
+
+**久期性质：**
+1. 零息债券的久期 = 到期时间；附息债券久期 ≤ 到期时间
+2. 息票利率越低 → 久期越长（价格风险越大）
+3. 距到期日越长 → 久期越长
+4. 债券组合久期 = 各债券久期的加权平均
+
+**凸性（Convexity）：**
+- 当利率变动较大时，久期预测会低估价格实际波动
+- 凸性可对久期预测进行修正：ΔP/P ≈ -D* × Δy + (1/2) × C × (Δy)²
+
+---
+
+### 2. 利率敏感性缺口管理（第7章）⭐⭐⭐⭐⭐
+
+**利率敏感性缺口：**
+- GAP = IRSA（利率敏感性资产）- IRSL（利率敏感性负债）
+
+| 缺口类型 | 状态 | 利率上升时 | 利率下降时 |
+|---------|------|-----------|-----------|
+| 正缺口 | IRSA > IRSL | 净利息收入↑ | 净利息收入↓ |
+| 负缺口 | IRSA < IRSL | 净利息收入↓ | 净利息收入↑ |
+| 零缺口 | IRSA = IRSL | 无影响 | 无影响 |
+
+**净利息收入变动：**
+- ΔNII = GAP × Δi
+
+---
+
+### 3. 久期缺口管理（第7章）⭐⭐⭐⭐⭐
+
+**资产组合久期：** DA = Σ(wi × DAi)
+**负债组合久期：** DL = Σ(wi × DLi)
+
+**久期缺口：** DGAP = DA - DL
+
+**金额久期缺口：** Dollar DGAP = DA × A - DL × L
+
+**股权市值变动：**
+- ΔE ≈ -DGAP × A × Δy / (1 + y)
+- 或: ΔE ≈ -(DA × A - DL × L) × Δy / (1 + y)
+
+| 久期缺口 | 利率↑ | 利率↓ |
+|---------|------|------|
+| 正缺口(DA > DL) | 权益市值↓ | 权益市值↑ |
+| 负缺口(DA < DL) | 权益市值↑ | 权益市值↓ |
+
+---
+
+### 4. ROE分解（第6章）⭐⭐⭐⭐
+
+**ROE（股东权益收益率）= 净利润 / 总权益资本**
+
+**ROE三层次分解：**
+- ROE = ROA × EM
+- ROA = NPM × AU（净利润率 × 资产利用率）
+- 进一步拆解：
+  - NPM（成本管理效率）= 净利润 / 总营业收入
+  - AU（资产管理效率）= 总营业收入 / 总资产
+  - EM（资金管理效率）= 总资产 / 总权益资本
+
+**ROA分解：**
+- ROA = (净利润/税前净营业收入) × (税前净营业收入/总营业收入) × (总营业收入/总资产)
+  - 第一项：税收管理效率
+  - 第二项：成本控制效率
+  - 第三项：资产管理效率
+
+---
+
+### 5. 巴塞尔协议与资本充足率（第15章）⭐⭐⭐⭐⭐
+
+**巴塞尔协议I：**
+- 资本充足率 = 总资本 / 风险加权资产 ≥ 8%
+- 核心资本充足率 = 一级资本 / 风险加权资产 ≥ 4%
+
+**资本构成：**
+- 一级资本（核心资本）：普通股、资本公积、留存收益、优质优先股
+- 二级资本（附属资本）：贷款损失准备金、次级债券、可转换债券等
+
+**风险加权资产计算（表内）：**
+
+| 风险权重 | 资产类型 |
+|---------|---------|
+| 0% | 现金、央行存款、美国国债 |
+| 20% | 银行间存款、地方政府债券 |
+| 50% | 住宅抵押贷款 |
+| 100% | 商业贷款、信用卡贷款、不动产 |
+
+**表外项目的信用等额转换系数**（将表外项目 → 等额信贷 → 乘以风险权重）
+
+**巴塞尔协议II：** 增加市场风险和操作风险的资本要求，引入VaR模型
+
+**巴塞尔协议III：**
+- 杠杆率 = 一级资本净额 / 调整后的表内外资产余额 ≥ 3%
+- 流动性覆盖率（LCR）= 优质流动性资产 / 未来30日现金净流出量 ≥ 100%
+- 净稳定资金比率（NSFR）= 可用稳定资金 / 业务所需稳定资金 ≥ 100%
+- 宏观审慎监管：逆周期资本缓冲、动态拨备
+
+---
+
+### 6. 流动性缺口预测（第10-11章）⭐⭐⭐
+
+**资金来源与运用法：**
+- 流动性缺口 = 全部存款的预期变化 - 全部贷款的预期变化
+
+**资金结构法：**
+- 将负债分为：波动性负债、易变资金、稳定资金
+- 为不同类型资金储存不同比例的流动性储备
+
+**流动性管理策略：**
+- 资产流动性管理（持有流动性资产）—小银行
+- 负债流动性管理（借入流动性资金）—大银行
+- 平衡流动性管理策略
+
+---
+
+### 7. 企业贷款定价（第17章）⭐⭐⭐
+
+**成本加成贷款定价法：**
+- 贷款利率 = 资金成本 + 非资金运营成本 + 风险溢价 + 预期利润率
+
+**价格领导模型：**
+- 贷款利率 = 基础利率（如LPR）+ 风险溢价
+
+**LPR（贷款市场报价利率）：**
+- 由20家报价行按MLF利率加点形成
+- 1年期LPR适用于1年期及以下贷款
+- 5年期以上LPR适用于中长期贷款
+
+---
+
+### 8. 资金成本计算（第12-13章）⭐⭐⭐
+
+**存款与货币市场借入资金的加权平均利息成本：**
+- = Σ(各资金来源金额 × 对应利率) / Σ各资金来源金额
+
+**借入资金的收支平衡成本率：**
+- = (借入资金利息成本 + 其他运营成本) / 可用于投资的资金
+
+**总资产成本的加权平均数（含股东权益成本）：**
+- = Σ(各类资金来源 × 对应成本率) / 总资金来源
+
+---
+
+### 9. 衍生工具与利率风险管理（第8章）⭐⭐⭐⭐
+
+**策略对照表（敏感性缺口）：**
+
+| 缺口情况 | 利率走势 | 期货策略 | 期权策略 | 互换策略 |
+|---------|---------|---------|---------|---------|
+| 正缺口(IRSA>IRSL) | 利率↓ | 多头套期保值 | 买入看涨期权 或 卖出看跌期权 | 固定利率收款方 |
+| 负缺口(IRSA<IRSL) | 利率↑ | 空头套期保值 | 买入看跌期权 或 卖出看涨期权 | 固定利率付款方 |
+
+**策略对照表（久期缺口）：**
+
+| 久期缺口 | 利率走势 | 期货策略 | 期权策略 | 互换策略 |
+|---------|---------|---------|---------|---------|
+| 正缺口(DA>DL) | 利率↑ | 空头套期保值 | 买入看跌 或 卖出看涨 | 固定利率付款方 |
+| 负缺口(DA<DL) | 利率↓ | 多头套期保值 | 买入看涨 或 卖出看跌 | 固定利率收款方 |
+
+---
+
+### 10. 信用风险与流动性风险指标（第6章）⭐⭐⭐
+
+**信用风险指标：**
+- 不良贷款率（NPL）= 不良贷款余额 / 贷款总额
+- 拨备覆盖率 = 贷款损失准备金 / 不良贷款余额
+- 贷款拨备率 = 贷款损失准备金 / 总贷款
+- 贷款五级分类：正常→关注→次级→可疑→损失
+- 不良贷款 = 次级 + 可疑 + 损失
+
+**流动性风险指标：**
+- 流动性比率 = 流动性资产 / 流动性负债
+- 贷存比 = 贷款总额 / 存款总额
+
+**贷款损失准备金公式：**
+- 期初余额 + 本年贷款损失预提(PLL) = 调整后的贷款损失准备金
+- 调整后的贷款损失准备金 - 实际冲销 + 追回款项 = 期末余额
+
+---
+
+## 二、材料分析题重点案例（第四大题）
+
+### 案例1：影子银行 ⭐⭐⭐⭐⭐
+
+**定义：**
+- FSB定义：受较少监管或不受监管的信用中介活动和机构
+- 中国实质：'银行的影子'，类贷款业务，与传统银行互补
+
+**产生原因：**
+1. 银行监管套利（规避资本充足率、存贷比、行业投向限制）
+2. 存款脱媒（居民对高收益理财的需求）
+3. 金融创新 + 监管放松 + 货币宽松
+4. 中小企业融资难、金融抑制
+
+**三阶段发展：**
+- 2008-2010：银信合作（信托通道）
+- 2011-2013：银银、银证多通道
+- 2014-2017：银基合作、同业存单嵌套
+
+**影响：**
+- 正面：弥补融资缺口
+- 负面：拉长套利链条、推高杠杆、资金空转、金融风险上升
+
+**监管措施：**
+- 2017年'三违反、三套利、四不当'专项治理
+- 表外理财纳入MPA考核
+
+---
+
+### 案例2：余额宝与金融脱媒 ⭐⭐⭐⭐
+
+**余额宝的监管套利本质：**
+- 同时满足活期存款流动性和定期存款收益率
+- 规避存款准备金和利率管制
+- 对银行负债端造成'存款脱媒'冲击
+
+**金融脱媒度量：**
+- 资产方脱媒：非金融企业对银行的负债 / 非金融企业对国内总负债
+- 负债方脱媒：居民对银行的金融要求权 / 居民总金融资产
+
+---
+
+### 案例3：钱荒事件（第10-11章）⭐⭐⭐⭐
+
+**原因：**
+- 银行体系存贷款占比缺口扩大
+- 影子银行/表外业务扩张
+- 同业负债滚续压力
+- 流动性管理失衡
+
+**启示：**
+- 流动性管理的重要性
+- 资产负债期限匹配
+- 公众信心对银行的特殊意义
+
+---
+
+### 案例4：美国银行业法案演变（第2章）⭐⭐⭐
+
+| 时间 | 法案 | 核心内容 |
+|-----|------|---------|
+| 1863-1864 | 国民货币及银行法案 | 成立货币监理署 |
+| 1913 | 联邦储备法 | 成立美联储，最后贷款人 |
+| 1933 | 格拉斯-斯蒂格尔法案(G-S) | 分业经营，成立FDIC |
+| 1994 | 瑞格尔-尼尔法案 | 允许跨州设立分行 |
+| 1999 | 金融服务现代化法案 | 废除分业经营，混业经营合法化 |
+
+---
+
+### 案例5：工行与宁波银行对比（第5章）⭐⭐⭐
+
+**分析角度：**
+- 资产负债结构差异（应收款项类投资占比）
+- 影子银行业务参与度差异
+- 大型银行 vs 中小银行的经营模式差异
+
+---
+
+### 案例6：存款保险制度（第12-13章）⭐⭐⭐
+
+- 核心：建立市场化风险补偿机制
+- 作用：保护存款人利益、维护金融稳定、为利率市场化护航
+- 美国FDIC：具有监督管理职能，有效降低银行倒闭数量
+
+---
+
+。">
+<meta property="og:title" content="商业银行管理期末复习指南lmh制作">
+<meta property="og:description" content="# 商业银行管理 - 期末复习指南
+
+## 考试结构
+- A/B卷均为 **4道大题**
+- 前3道：**计算分析题**（重点关注公式、指标计算和策略运用）
+- 第4道：**材料分析题**（重点关注案例讨论和理论应用）
+- 复习范围：课后习题 + 课堂讨论案例 + 工行年报前80页
+
+---
+
+## 一、计算分析题核心考点（前三大题）
+
+### 1. 久期计算与利率风险管理（第7章）⭐⭐⭐⭐⭐
+
+**麦考雷久期（Macaulay Duration）：**
+- 定义：债券各期现金流现值的加权平均时间，度量收回投资资金所需的平均时间
+- 公式：D = Σ[t × PV(CFt)] / P
+
+**修正久期（Modified Duration）：**
+- D* = D / (1 + y)，其中 y 为到期收益率
+
+**债券价格变动近似：**
+- ΔP/P ≈ -D* × Δy
+- 即：债券价格变动百分比 ≈ -修正久期 × 到期收益率变动
+
+**久期性质：**
+1. 零息债券的久期 = 到期时间；附息债券久期 ≤ 到期时间
+2. 息票利率越低 → 久期越长（价格风险越大）
+3. 距到期日越长 → 久期越长
+4. 债券组合久期 = 各债券久期的加权平均
+
+**凸性（Convexity）：**
+- 当利率变动较大时，久期预测会低估价格实际波动
+- 凸性可对久期预测进行修正：ΔP/P ≈ -D* × Δy + (1/2) × C × (Δy)²
+
+---
+
+### 2. 利率敏感性缺口管理（第7章）⭐⭐⭐⭐⭐
+
+**利率敏感性缺口：**
+- GAP = IRSA（利率敏感性资产）- IRSL（利率敏感性负债）
+
+| 缺口类型 | 状态 | 利率上升时 | 利率下降时 |
+|---------|------|-----------|-----------|
+| 正缺口 | IRSA > IRSL | 净利息收入↑ | 净利息收入↓ |
+| 负缺口 | IRSA < IRSL | 净利息收入↓ | 净利息收入↑ |
+| 零缺口 | IRSA = IRSL | 无影响 | 无影响 |
+
+**净利息收入变动：**
+- ΔNII = GAP × Δi
+
+---
+
+### 3. 久期缺口管理（第7章）⭐⭐⭐⭐⭐
+
+**资产组合久期：** DA = Σ(wi × DAi)
+**负债组合久期：** DL = Σ(wi × DLi)
+
+**久期缺口：** DGAP = DA - DL
+
+**金额久期缺口：** Dollar DGAP = DA × A - DL × L
+
+**股权市值变动：**
+- ΔE ≈ -DGAP × A × Δy / (1 + y)
+- 或: ΔE ≈ -(DA × A - DL × L) × Δy / (1 + y)
+
+| 久期缺口 | 利率↑ | 利率↓ |
+|---------|------|------|
+| 正缺口(DA > DL) | 权益市值↓ | 权益市值↑ |
+| 负缺口(DA < DL) | 权益市值↑ | 权益市值↓ |
+
+---
+
+### 4. ROE分解（第6章）⭐⭐⭐⭐
+
+**ROE（股东权益收益率）= 净利润 / 总权益资本**
+
+**ROE三层次分解：**
+- ROE = ROA × EM
+- ROA = NPM × AU（净利润率 × 资产利用率）
+- 进一步拆解：
+  - NPM（成本管理效率）= 净利润 / 总营业收入
+  - AU（资产管理效率）= 总营业收入 / 总资产
+  - EM（资金管理效率）= 总资产 / 总权益资本
+
+**ROA分解：**
+- ROA = (净利润/税前净营业收入) × (税前净营业收入/总营业收入) × (总营业收入/总资产)
+  - 第一项：税收管理效率
+  - 第二项：成本控制效率
+  - 第三项：资产管理效率
+
+---
+
+### 5. 巴塞尔协议与资本充足率（第15章）⭐⭐⭐⭐⭐
+
+**巴塞尔协议I：**
+- 资本充足率 = 总资本 / 风险加权资产 ≥ 8%
+- 核心资本充足率 = 一级资本 / 风险加权资产 ≥ 4%
+
+**资本构成：**
+- 一级资本（核心资本）：普通股、资本公积、留存收益、优质优先股
+- 二级资本（附属资本）：贷款损失准备金、次级债券、可转换债券等
+
+**风险加权资产计算（表内）：**
+
+| 风险权重 | 资产类型 |
+|---------|---------|
+| 0% | 现金、央行存款、美国国债 |
+| 20% | 银行间存款、地方政府债券 |
+| 50% | 住宅抵押贷款 |
+| 100% | 商业贷款、信用卡贷款、不动产 |
+
+**表外项目的信用等额转换系数**（将表外项目 → 等额信贷 → 乘以风险权重）
+
+**巴塞尔协议II：** 增加市场风险和操作风险的资本要求，引入VaR模型
+
+**巴塞尔协议III：**
+- 杠杆率 = 一级资本净额 / 调整后的表内外资产余额 ≥ 3%
+- 流动性覆盖率（LCR）= 优质流动性资产 / 未来30日现金净流出量 ≥ 100%
+- 净稳定资金比率（NSFR）= 可用稳定资金 / 业务所需稳定资金 ≥ 100%
+- 宏观审慎监管：逆周期资本缓冲、动态拨备
+
+---
+
+### 6. 流动性缺口预测（第10-11章）⭐⭐⭐
+
+**资金来源与运用法：**
+- 流动性缺口 = 全部存款的预期变化 - 全部贷款的预期变化
+
+**资金结构法：**
+- 将负债分为：波动性负债、易变资金、稳定资金
+- 为不同类型资金储存不同比例的流动性储备
+
+**流动性管理策略：**
+- 资产流动性管理（持有流动性资产）—小银行
+- 负债流动性管理（借入流动性资金）—大银行
+- 平衡流动性管理策略
+
+---
+
+### 7. 企业贷款定价（第17章）⭐⭐⭐
+
+**成本加成贷款定价法：**
+- 贷款利率 = 资金成本 + 非资金运营成本 + 风险溢价 + 预期利润率
+
+**价格领导模型：**
+- 贷款利率 = 基础利率（如LPR）+ 风险溢价
+
+**LPR（贷款市场报价利率）：**
+- 由20家报价行按MLF利率加点形成
+- 1年期LPR适用于1年期及以下贷款
+- 5年期以上LPR适用于中长期贷款
+
+---
+
+### 8. 资金成本计算（第12-13章）⭐⭐⭐
+
+**存款与货币市场借入资金的加权平均利息成本：**
+- = Σ(各资金来源金额 × 对应利率) / Σ各资金来源金额
+
+**借入资金的收支平衡成本率：**
+- = (借入资金利息成本 + 其他运营成本) / 可用于投资的资金
+
+**总资产成本的加权平均数（含股东权益成本）：**
+- = Σ(各类资金来源 × 对应成本率) / 总资金来源
+
+---
+
+### 9. 衍生工具与利率风险管理（第8章）⭐⭐⭐⭐
+
+**策略对照表（敏感性缺口）：**
+
+| 缺口情况 | 利率走势 | 期货策略 | 期权策略 | 互换策略 |
+|---------|---------|---------|---------|---------|
+| 正缺口(IRSA>IRSL) | 利率↓ | 多头套期保值 | 买入看涨期权 或 卖出看跌期权 | 固定利率收款方 |
+| 负缺口(IRSA<IRSL) | 利率↑ | 空头套期保值 | 买入看跌期权 或 卖出看涨期权 | 固定利率付款方 |
+
+**策略对照表（久期缺口）：**
+
+| 久期缺口 | 利率走势 | 期货策略 | 期权策略 | 互换策略 |
+|---------|---------|---------|---------|---------|
+| 正缺口(DA>DL) | 利率↑ | 空头套期保值 | 买入看跌 或 卖出看涨 | 固定利率付款方 |
+| 负缺口(DA<DL) | 利率↓ | 多头套期保值 | 买入看涨 或 卖出看跌 | 固定利率收款方 |
+
+---
+
+### 10. 信用风险与流动性风险指标（第6章）⭐⭐⭐
+
+**信用风险指标：**
+- 不良贷款率（NPL）= 不良贷款余额 / 贷款总额
+- 拨备覆盖率 = 贷款损失准备金 / 不良贷款余额
+- 贷款拨备率 = 贷款损失准备金 / 总贷款
+- 贷款五级分类：正常→关注→次级→可疑→损失
+- 不良贷款 = 次级 + 可疑 + 损失
+
+**流动性风险指标：**
+- 流动性比率 = 流动性资产 / 流动性负债
+- 贷存比 = 贷款总额 / 存款总额
+
+**贷款损失准备金公式：**
+- 期初余额 + 本年贷款损失预提(PLL) = 调整后的贷款损失准备金
+- 调整后的贷款损失准备金 - 实际冲销 + 追回款项 = 期末余额
+
+---
+
+## 二、材料分析题重点案例（第四大题）
+
+### 案例1：影子银行 ⭐⭐⭐⭐⭐
+
+**定义：**
+- FSB定义：受较少监管或不受监管的信用中介活动和机构
+- 中国实质：'银行的影子'，类贷款业务，与传统银行互补
+
+**产生原因：**
+1. 银行监管套利（规避资本充足率、存贷比、行业投向限制）
+2. 存款脱媒（居民对高收益理财的需求）
+3. 金融创新 + 监管放松 + 货币宽松
+4. 中小企业融资难、金融抑制
+
+**三阶段发展：**
+- 2008-2010：银信合作（信托通道）
+- 2011-2013：银银、银证多通道
+- 2014-2017：银基合作、同业存单嵌套
+
+**影响：**
+- 正面：弥补融资缺口
+- 负面：拉长套利链条、推高杠杆、资金空转、金融风险上升
+
+**监管措施：**
+- 2017年'三违反、三套利、四不当'专项治理
+- 表外理财纳入MPA考核
+
+---
+
+### 案例2：余额宝与金融脱媒 ⭐⭐⭐⭐
+
+**余额宝的监管套利本质：**
+- 同时满足活期存款流动性和定期存款收益率
+- 规避存款准备金和利率管制
+- 对银行负债端造成'存款脱媒'冲击
+
+**金融脱媒度量：**
+- 资产方脱媒：非金融企业对银行的负债 / 非金融企业对国内总负债
+- 负债方脱媒：居民对银行的金融要求权 / 居民总金融资产
+
+---
+
+### 案例3：钱荒事件（第10-11章）⭐⭐⭐⭐
+
+**原因：**
+- 银行体系存贷款占比缺口扩大
+- 影子银行/表外业务扩张
+- 同业负债滚续压力
+- 流动性管理失衡
+
+**启示：**
+- 流动性管理的重要性
+- 资产负债期限匹配
+- 公众信心对银行的特殊意义
+
+---
+
+### 案例4：美国银行业法案演变（第2章）⭐⭐⭐
+
+| 时间 | 法案 | 核心内容 |
+|-----|------|---------|
+| 1863-1864 | 国民货币及银行法案 | 成立货币监理署 |
+| 1913 | 联邦储备法 | 成立美联储，最后贷款人 |
+| 1933 | 格拉斯-斯蒂格尔法案(G-S) | 分业经营，成立FDIC |
+| 1994 | 瑞格尔-尼尔法案 | 允许跨州设立分行 |
+| 1999 | 金融服务现代化法案 | 废除分业经营，混业经营合法化 |
+
+---
+
+### 案例5：工行与宁波银行对比（第5章）⭐⭐⭐
+
+**分析角度：**
+- 资产负债结构差异（应收款项类投资占比）
+- 影子银行业务参与度差异
+- 大型银行 vs 中小银行的经营模式差异
+
+---
+
+### 案例6：存款保险制度（第12-13章）⭐⭐⭐
+
+- 核心：建立市场化风险补偿机制
+- 作用：保护存款人利益、维护金融稳定、为利率市场化护航
+- 美国FDIC：具有监督管理职能，有效降低银行倒闭数量
+
+---
+
+。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://lmhstart.github.io/post/shang-ye-yin-xing-guan-li-qi-mo-fu-xi-zhi-nan-lmh-zhi-zuo.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/lmhstart/lmhstart.github.io/main/fnn.jpg">
+<title>商业银行管理期末复习指南lmh制作</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">商业银行管理期末复习指南lmh制作</h1>
+<div class="title-right">
+    <a href="https://lmhstart.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/lmhstart/lmhstart.github.io/issues/10" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>商业银行管理 - 期末复习指南</h1>
+<h2>考试结构</h2>
+<ul>
+<li>A/B卷均为 <strong>4道大题</strong></li>
+<li>前3道：<strong>计算分析题</strong>（重点关注公式、指标计算和策略运用）</li>
+<li>第4道：<strong>材料分析题</strong>（重点关注案例讨论和理论应用）</li>
+<li>复习范围：课后习题 + 课堂讨论案例 + 工行年报前80页</li>
+</ul>
+<hr>
+<h2>一、计算分析题核心考点（前三大题）</h2>
+<h3>1. 久期计算与利率风险管理（第7章）⭐⭐⭐⭐⭐</h3>
+<p><strong>麦考雷久期（Macaulay Duration）：</strong></p>
+<ul>
+<li>定义：债券各期现金流现值的加权平均时间，度量收回投资资金所需的平均时间</li>
+<li>公式：D = Σ[t × PV(CFt)] / P</li>
+</ul>
+<p><strong>修正久期（Modified Duration）：</strong></p>
+<ul>
+<li>D* = D / (1 + y)，其中 y 为到期收益率</li>
+</ul>
+<p><strong>债券价格变动近似：</strong></p>
+<ul>
+<li>ΔP/P ≈ -D* × Δy</li>
+<li>即：债券价格变动百分比 ≈ -修正久期 × 到期收益率变动</li>
+</ul>
+<p><strong>久期性质：</strong></p>
+<ol>
+<li>零息债券的久期 = 到期时间；附息债券久期 ≤ 到期时间</li>
+<li>息票利率越低 → 久期越长（价格风险越大）</li>
+<li>距到期日越长 → 久期越长</li>
+<li>债券组合久期 = 各债券久期的加权平均</li>
+</ol>
+<p><strong>凸性（Convexity）：</strong></p>
+<ul>
+<li>当利率变动较大时，久期预测会低估价格实际波动</li>
+<li>凸性可对久期预测进行修正：ΔP/P ≈ -D* × Δy + (1/2) × C × (Δy)²</li>
+</ul>
+<hr>
+<h3>2. 利率敏感性缺口管理（第7章）⭐⭐⭐⭐⭐</h3>
+<p><strong>利率敏感性缺口：</strong></p>
+<ul>
+<li>GAP = IRSA（利率敏感性资产）- IRSL（利率敏感性负债）</li>
+</ul>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>缺口类型</th>
+<th>状态</th>
+<th>利率上升时</th>
+<th>利率下降时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正缺口</td>
+<td>IRSA &gt; IRSL</td>
+<td>净利息收入↑</td>
+<td>净利息收入↓</td>
+</tr>
+<tr>
+<td>负缺口</td>
+<td>IRSA &lt; IRSL</td>
+<td>净利息收入↓</td>
+<td>净利息收入↑</td>
+</tr>
+<tr>
+<td>零缺口</td>
+<td>IRSA = IRSL</td>
+<td>无影响</td>
+<td>无影响</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>净利息收入变动：</strong></p>
+<ul>
+<li>ΔNII = GAP × Δi</li>
+</ul>
+<hr>
+<h3>3. 久期缺口管理（第7章）⭐⭐⭐⭐⭐</h3>
+<p><strong>资产组合久期：</strong> DA = Σ(wi × DAi)<br>
+<strong>负债组合久期：</strong> DL = Σ(wi × DLi)</p>
+<p><strong>久期缺口：</strong> DGAP = DA - DL</p>
+<p><strong>金额久期缺口：</strong> Dollar DGAP = DA × A - DL × L</p>
+<p><strong>股权市值变动：</strong></p>
+<ul>
+<li>ΔE ≈ -DGAP × A × Δy / (1 + y)</li>
+<li>或: ΔE ≈ -(DA × A - DL × L) × Δy / (1 + y)</li>
+</ul>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>久期缺口</th>
+<th>利率↑</th>
+<th>利率↓</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正缺口(DA &gt; DL)</td>
+<td>权益市值↓</td>
+<td>权益市值↑</td>
+</tr>
+<tr>
+<td>负缺口(DA &lt; DL)</td>
+<td>权益市值↑</td>
+<td>权益市值↓</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3>4. ROE分解（第6章）⭐⭐⭐⭐</h3>
+<p><strong>ROE（股东权益收益率）= 净利润 / 总权益资本</strong></p>
+<p><strong>ROE三层次分解：</strong></p>
+<ul>
+<li>ROE = ROA × EM</li>
+<li>ROA = NPM × AU（净利润率 × 资产利用率）</li>
+<li>进一步拆解：
+<ul>
+<li>NPM（成本管理效率）= 净利润 / 总营业收入</li>
+<li>AU（资产管理效率）= 总营业收入 / 总资产</li>
+<li>EM（资金管理效率）= 总资产 / 总权益资本</li>
+</ul>
+</li>
+</ul>
+<p><strong>ROA分解：</strong></p>
+<ul>
+<li>ROA = (净利润/税前净营业收入) × (税前净营业收入/总营业收入) × (总营业收入/总资产)
+<ul>
+<li>第一项：税收管理效率</li>
+<li>第二项：成本控制效率</li>
+<li>第三项：资产管理效率</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>5. 巴塞尔协议与资本充足率（第15章）⭐⭐⭐⭐⭐</h3>
+<p><strong>巴塞尔协议I：</strong></p>
+<ul>
+<li>资本充足率 = 总资本 / 风险加权资产 ≥ 8%</li>
+<li>核心资本充足率 = 一级资本 / 风险加权资产 ≥ 4%</li>
+</ul>
+<p><strong>资本构成：</strong></p>
+<ul>
+<li>一级资本（核心资本）：普通股、资本公积、留存收益、优质优先股</li>
+<li>二级资本（附属资本）：贷款损失准备金、次级债券、可转换债券等</li>
+</ul>
+<p><strong>风险加权资产计算（表内）：</strong></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>风险权重</th>
+<th>资产类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0%</td>
+<td>现金、央行存款、美国国债</td>
+</tr>
+<tr>
+<td>20%</td>
+<td>银行间存款、地方政府债券</td>
+</tr>
+<tr>
+<td>50%</td>
+<td>住宅抵押贷款</td>
+</tr>
+<tr>
+<td>100%</td>
+<td>商业贷款、信用卡贷款、不动产</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>表外项目的信用等额转换系数</strong>（将表外项目 → 等额信贷 → 乘以风险权重）</p>
+<p><strong>巴塞尔协议II：</strong> 增加市场风险和操作风险的资本要求，引入VaR模型</p>
+<p><strong>巴塞尔协议III：</strong></p>
+<ul>
+<li>杠杆率 = 一级资本净额 / 调整后的表内外资产余额 ≥ 3%</li>
+<li>流动性覆盖率（LCR）= 优质流动性资产 / 未来30日现金净流出量 ≥ 100%</li>
+<li>净稳定资金比率（NSFR）= 可用稳定资金 / 业务所需稳定资金 ≥ 100%</li>
+<li>宏观审慎监管：逆周期资本缓冲、动态拨备</li>
+</ul>
+<hr>
+<h3>6. 流动性缺口预测（第10-11章）⭐⭐⭐</h3>
+<p><strong>资金来源与运用法：</strong></p>
+<ul>
+<li>流动性缺口 = 全部存款的预期变化 - 全部贷款的预期变化</li>
+</ul>
+<p><strong>资金结构法：</strong></p>
+<ul>
+<li>将负债分为：波动性负债、易变资金、稳定资金</li>
+<li>为不同类型资金储存不同比例的流动性储备</li>
+</ul>
+<p><strong>流动性管理策略：</strong></p>
+<ul>
+<li>资产流动性管理（持有流动性资产）—小银行</li>
+<li>负债流动性管理（借入流动性资金）—大银行</li>
+<li>平衡流动性管理策略</li>
+</ul>
+<hr>
+<h3>7. 企业贷款定价（第17章）⭐⭐⭐</h3>
+<p><strong>成本加成贷款定价法：</strong></p>
+<ul>
+<li>贷款利率 = 资金成本 + 非资金运营成本 + 风险溢价 + 预期利润率</li>
+</ul>
+<p><strong>价格领导模型：</strong></p>
+<ul>
+<li>贷款利率 = 基础利率（如LPR）+ 风险溢价</li>
+</ul>
+<p><strong>LPR（贷款市场报价利率）：</strong></p>
+<ul>
+<li>由20家报价行按MLF利率加点形成</li>
+<li>1年期LPR适用于1年期及以下贷款</li>
+<li>5年期以上LPR适用于中长期贷款</li>
+</ul>
+<hr>
+<h3>8. 资金成本计算（第12-13章）⭐⭐⭐</h3>
+<p><strong>存款与货币市场借入资金的加权平均利息成本：</strong></p>
+<ul>
+<li>= Σ(各资金来源金额 × 对应利率) / Σ各资金来源金额</li>
+</ul>
+<p><strong>借入资金的收支平衡成本率：</strong></p>
+<ul>
+<li>= (借入资金利息成本 + 其他运营成本) / 可用于投资的资金</li>
+</ul>
+<p><strong>总资产成本的加权平均数（含股东权益成本）：</strong></p>
+<ul>
+<li>= Σ(各类资金来源 × 对应成本率) / 总资金来源</li>
+</ul>
+<hr>
+<h3>9. 衍生工具与利率风险管理（第8章）⭐⭐⭐⭐</h3>
+<p><strong>策略对照表（敏感性缺口）：</strong></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>缺口情况</th>
+<th>利率走势</th>
+<th>期货策略</th>
+<th>期权策略</th>
+<th>互换策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正缺口(IRSA&gt;IRSL)</td>
+<td>利率↓</td>
+<td>多头套期保值</td>
+<td>买入看涨期权 或 卖出看跌期权</td>
+<td>固定利率收款方</td>
+</tr>
+<tr>
+<td>负缺口(IRSA&lt;IRSL)</td>
+<td>利率↑</td>
+<td>空头套期保值</td>
+<td>买入看跌期权 或 卖出看涨期权</td>
+<td>固定利率付款方</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>策略对照表（久期缺口）：</strong></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>久期缺口</th>
+<th>利率走势</th>
+<th>期货策略</th>
+<th>期权策略</th>
+<th>互换策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正缺口(DA&gt;DL)</td>
+<td>利率↑</td>
+<td>空头套期保值</td>
+<td>买入看跌 或 卖出看涨</td>
+<td>固定利率付款方</td>
+</tr>
+<tr>
+<td>负缺口(DA&lt;DL)</td>
+<td>利率↓</td>
+<td>多头套期保值</td>
+<td>买入看涨 或 卖出看跌</td>
+<td>固定利率收款方</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3>10. 信用风险与流动性风险指标（第6章）⭐⭐⭐</h3>
+<p><strong>信用风险指标：</strong></p>
+<ul>
+<li>不良贷款率（NPL）= 不良贷款余额 / 贷款总额</li>
+<li>拨备覆盖率 = 贷款损失准备金 / 不良贷款余额</li>
+<li>贷款拨备率 = 贷款损失准备金 / 总贷款</li>
+<li>贷款五级分类：正常→关注→次级→可疑→损失</li>
+<li>不良贷款 = 次级 + 可疑 + 损失</li>
+</ul>
+<p><strong>流动性风险指标：</strong></p>
+<ul>
+<li>流动性比率 = 流动性资产 / 流动性负债</li>
+<li>贷存比 = 贷款总额 / 存款总额</li>
+</ul>
+<p><strong>贷款损失准备金公式：</strong></p>
+<ul>
+<li>期初余额 + 本年贷款损失预提(PLL) = 调整后的贷款损失准备金</li>
+<li>调整后的贷款损失准备金 - 实际冲销 + 追回款项 = 期末余额</li>
+</ul>
+<hr>
+<h2>二、材料分析题重点案例（第四大题）</h2>
+<h3>案例1：影子银行 ⭐⭐⭐⭐⭐</h3>
+<p><strong>定义：</strong></p>
+<ul>
+<li>FSB定义：受较少监管或不受监管的信用中介活动和机构</li>
+<li>中国实质："银行的影子"，类贷款业务，与传统银行互补</li>
+</ul>
+<p><strong>产生原因：</strong></p>
+<ol>
+<li>银行监管套利（规避资本充足率、存贷比、行业投向限制）</li>
+<li>存款脱媒（居民对高收益理财的需求）</li>
+<li>金融创新 + 监管放松 + 货币宽松</li>
+<li>中小企业融资难、金融抑制</li>
+</ol>
+<p><strong>三阶段发展：</strong></p>
+<ul>
+<li>2008-2010：银信合作（信托通道）</li>
+<li>2011-2013：银银、银证多通道</li>
+<li>2014-2017：银基合作、同业存单嵌套</li>
+</ul>
+<p><strong>影响：</strong></p>
+<ul>
+<li>正面：弥补融资缺口</li>
+<li>负面：拉长套利链条、推高杠杆、资金空转、金融风险上升</li>
+</ul>
+<p><strong>监管措施：</strong></p>
+<ul>
+<li>2017年"三违反、三套利、四不当"专项治理</li>
+<li>表外理财纳入MPA考核</li>
+</ul>
+<hr>
+<h3>案例2：余额宝与金融脱媒 ⭐⭐⭐⭐</h3>
+<p><strong>余额宝的监管套利本质：</strong></p>
+<ul>
+<li>同时满足活期存款流动性和定期存款收益率</li>
+<li>规避存款准备金和利率管制</li>
+<li>对银行负债端造成"存款脱媒"冲击</li>
+</ul>
+<p><strong>金融脱媒度量：</strong></p>
+<ul>
+<li>资产方脱媒：非金融企业对银行的负债 / 非金融企业对国内总负债</li>
+<li>负债方脱媒：居民对银行的金融要求权 / 居民总金融资产</li>
+</ul>
+<hr>
+<h3>案例3：钱荒事件（第10-11章）⭐⭐⭐⭐</h3>
+<p><strong>原因：</strong></p>
+<ul>
+<li>银行体系存贷款占比缺口扩大</li>
+<li>影子银行/表外业务扩张</li>
+<li>同业负债滚续压力</li>
+<li>流动性管理失衡</li>
+</ul>
+<p><strong>启示：</strong></p>
+<ul>
+<li>流动性管理的重要性</li>
+<li>资产负债期限匹配</li>
+<li>公众信心对银行的特殊意义</li>
+</ul>
+<hr>
+<h3>案例4：美国银行业法案演变（第2章）⭐⭐⭐</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>时间</th>
+<th>法案</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1863-1864</td>
+<td>国民货币及银行法案</td>
+<td>成立货币监理署</td>
+</tr>
+<tr>
+<td>1913</td>
+<td>联邦储备法</td>
+<td>成立美联储，最后贷款人</td>
+</tr>
+<tr>
+<td>1933</td>
+<td>格拉斯-斯蒂格尔法案(G-S)</td>
+<td>分业经营，成立FDIC</td>
+</tr>
+<tr>
+<td>1994</td>
+<td>瑞格尔-尼尔法案</td>
+<td>允许跨州设立分行</td>
+</tr>
+<tr>
+<td>1999</td>
+<td>金融服务现代化法案</td>
+<td>废除分业经营，混业经营合法化</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h3>案例5：工行与宁波银行对比（第5章）⭐⭐⭐</h3>
+<p><strong>分析角度：</strong></p>
+<ul>
+<li>资产负债结构差异（应收款项类投资占比）</li>
+<li>影子银行业务参与度差异</li>
+<li>大型银行 vs 中小银行的经营模式差异</li>
+</ul>
+<hr>
+<h3>案例6：存款保险制度（第12-13章）⭐⭐⭐</h3>
+<ul>
+<li>核心：建立市场化风险补偿机制</li>
+<li>作用：保护存款人利益、维护金融稳定、为利率市场化护航</li>
+<li>美国FDIC：具有监督管理职能，有效降低银行倒闭数量</li>
+</ul>
+<hr></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://lmhstart.github.io">B L O G</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","lmhstart/lmhstart.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
